@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
 
@@ -17,6 +18,10 @@ class ProfileViewController: UIViewController {
         
         setupTableView()
         setupConstraints()
+        
+        #if DEBUG
+        view.backgroundColor = .yellow
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
