@@ -5,7 +5,7 @@
 //  Created by Ален Авако on 14.09.2021.
 //
 
-import UIKit
+import SnapKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     
@@ -117,34 +117,34 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
         addStatus.delegate = self
         contentView.addSubviews(getStatusButton, nameLabel, statusLabel, addStatus, backgroudForAvatar, profileImage, xMarkButton)
         
+        profileImage.snp.makeConstraints {
+            $0.leading.top.equalToSuperview().offset(leadingIndent)
+            $0.size.equalTo(CGSize(width: 100, height: 100))
+        }
         
-        NSLayoutConstraint.activate([
-            
-            profileImage.widthAnchor.constraint(equalToConstant: 100),
-            profileImage.heightAnchor.constraint(equalTo: profileImage.widthAnchor),
-            profileImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: leadingIndent),
-            profileImage.topAnchor.constraint(equalTo: self.topAnchor, constant: leadingIndent),
-            
-            nameLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
-            nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
-            
-            getStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: leadingIndent),
-            getStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: trailingIndent),
-            getStatusButton.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 42),
-            getStatusButton.heightAnchor.constraint(equalToConstant: 50),
-            
-            statusLabel.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
-            statusLabel.bottomAnchor.constraint(equalTo: addStatus.topAnchor, constant: -6),
-            statusLabel.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: trailingIndent),
-            
-            addStatus.leadingAnchor.constraint(equalTo: profileImage.trailingAnchor, constant: 20),
-            addStatus.bottomAnchor.constraint(equalTo: getStatusButton.topAnchor, constant: -10),
-            addStatus.trailingAnchor.constraint(greaterThanOrEqualTo: contentView.trailingAnchor, constant: trailingIndent),
-            addStatus.heightAnchor.constraint(equalToConstant: 40),
-        ])
+        nameLabel.snp.makeConstraints {
+            $0.leading.equalTo(profileImage.snp.trailing).offset(20)
+            $0.top.equalToSuperview().offset(27)
+        }
         
-        setNeedsLayout()
-        layoutIfNeeded()
+        getStatusButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.top.equalTo(profileImage.snp.bottom).offset(42)
+            $0.height.equalTo(50)
+        }
+        
+        statusLabel.snp.makeConstraints {
+            $0.leading.equalTo(profileImage.snp.trailing).offset(20)
+            $0.trailing.equalToSuperview().offset(trailingIndent)
+            $0.bottom.equalTo(addStatus.snp.top).offset(-6)
+        }
+        
+        addStatus.snp.makeConstraints {
+            $0.leading.equalTo(profileImage.snp.trailing).offset(20)
+            $0.trailing.equalToSuperview().offset(trailingIndent)
+            $0.bottom.equalTo(getStatusButton.snp.top).offset(-10)
+            $0.height.equalTo(40)
+        }
     }
     
     
