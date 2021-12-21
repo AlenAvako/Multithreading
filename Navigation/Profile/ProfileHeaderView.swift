@@ -5,7 +5,6 @@
 //  Created by Ален Авако on 14.09.2021.
 //
 
-import UIKit
 import SnapKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
@@ -119,8 +118,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
         contentView.addSubviews(getStatusButton, nameLabel, statusLabel, addStatus, backgroudForAvatar, profileImage, xMarkButton)
         
         profileImage.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(leadingIndent)
-            $0.top.equalToSuperview().offset(leadingIndent)
+            $0.leading.top.equalToSuperview().offset(leadingIndent)
             $0.size.equalTo(CGSize(width: 100, height: 100))
         }
         
@@ -130,9 +128,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
         }
         
         getStatusButton.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(leadingIndent)
+            $0.leading.trailing.equalToSuperview().inset(16)
             $0.top.equalTo(profileImage.snp.bottom).offset(42)
-            $0.trailing.equalToSuperview().offset(trailingIndent)
             $0.height.equalTo(50)
         }
         
@@ -148,9 +145,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
             $0.bottom.equalTo(getStatusButton.snp.top).offset(-10)
             $0.height.equalTo(40)
         }
-        
-        setNeedsLayout()
-        layoutIfNeeded()
     }
     
     
