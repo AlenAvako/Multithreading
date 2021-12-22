@@ -8,6 +8,7 @@
 
 import UIKit
 import StorageService
+import iOSIntPackage
 
 class ProfileViewController: UIViewController {
 
@@ -82,6 +83,28 @@ extension ProfileViewController: UITableViewDataSource {
                                description: arrayOfPosts[indexPath.row].description,
                                likes: arrayOfPosts[indexPath.row].likes,
                                views: arrayOfPosts[indexPath.row].views)
+            
+            cell.postImage.tag = indexPath.row
+            let processor = ImageProcessor()
+            
+            for (i, _) in arrayOfPosts.enumerated() {
+                if cell.postImage.tag == i {
+                    if i == 0 {
+                        processor.processImage(sourceImage: cell.postImage.image!, filter: .tonal) { image in
+                            cell.postImage.image = image
+                        }
+                    } else if i == 1 {
+                        processor.processImage(sourceImage: cell.postImage.image!, filter: .bloom(intensity: 10)) { image in
+                            cell.postImage.image = image
+                        }
+                    } else if i == 2 {
+                        processor.processImage(sourceImage: cell.postImage.image!, filter: .crystallize(radius: 10)) { image in
+                            cell.postImage.image = image
+                        }
+                    }
+                }
+            }
+            
             return cell
         } else {
             let cell = postTableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.id, for: indexPath) as! PhotosTableViewCell
