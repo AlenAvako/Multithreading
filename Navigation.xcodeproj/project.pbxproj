@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		2D0516F0C4C393ECA2AF64E8 /* Pods_StorageService_StorageServiceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2490FF921B1B59F49073CDC8 /* Pods_StorageService_StorageServiceTests.framework */; };
 		478C7A2EFC50ED6E6D6CA259 /* Pods_StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D049F0EBB295466465D1A1F /* Pods_StorageService.framework */; };
+		8305BDA1276ABAF300B3E960 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BDA0276ABAF300B3E960 /* UserService.swift */; };
+		8305BDA3276ABB2A00B3E960 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BDA2276ABB2A00B3E960 /* User.swift */; };
+		8305BDA5276ABC8C00B3E960 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BDA4276ABC8C00B3E960 /* CurrentUserService.swift */; };
+		8305BDA72770C7AE00B3E960 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BDA62770C7AE00B3E960 /* TestUserService.swift */; };
 		834A9656275FF71200471133 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = 834A9655275FF71200471133 /* iOSIntPackage */; };
 		835BB28B26E661FC00220593 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835BB28A26E661FC00220593 /* AppDelegate.swift */; };
 		835BB28D26E661FC00220593 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835BB28C26E661FC00220593 /* SceneDelegate.swift */; };
@@ -81,6 +85,10 @@
 		4D049F0EBB295466465D1A1F /* Pods_StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		63108EDE2AAA015143EC8646 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
 		676B943E9BB3B2D08B07666E /* Pods-StorageService-StorageServiceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageService-StorageServiceTests.debug.xcconfig"; path = "Target Support Files/Pods-StorageService-StorageServiceTests/Pods-StorageService-StorageServiceTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8305BDA0276ABAF300B3E960 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		8305BDA2276ABB2A00B3E960 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		8305BDA4276ABC8C00B3E960 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
+		8305BDA62770C7AE00B3E960 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		835BB28726E661FC00220593 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		835BB28A26E661FC00220593 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		835BB28C26E661FC00220593 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,6 +164,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8305BD9F276ABADB00B3E960 /* UserService */ = {
+			isa = PBXGroup;
+			children = (
+				8305BDA2276ABB2A00B3E960 /* User.swift */,
+				8305BDA0276ABAF300B3E960 /* UserService.swift */,
+				8305BDA4276ABC8C00B3E960 /* CurrentUserService.swift */,
+				8305BDA62770C7AE00B3E960 /* TestUserService.swift */,
+			);
+			path = UserService;
+			sourceTree = "<group>";
+		};
 		835BB27E26E661FC00220593 = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +200,7 @@
 		835BB28926E661FC00220593 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				8305BD9F276ABADB00B3E960 /* UserService */,
 				838A1A1A2711F39B00046E92 /* Photo galery */,
 				838A1A17271070F200046E92 /* Post */,
 				83CE58C626EFFB7D00B419A3 /* Profile */,
@@ -508,11 +528,15 @@
 				835BB28D26E661FC00220593 /* SceneDelegate.swift in Sources */,
 				83CE58BF26EBBF3600B419A3 /* ProfileViewController.swift in Sources */,
 				83CE58C526ED02E000B419A3 /* InfoViewController.swift in Sources */,
+				8305BDA3276ABB2A00B3E960 /* User.swift in Sources */,
 				83CE58BD26EBBE6C00B419A3 /* FeedViewController.swift in Sources */,
 				838A1A2227148BFC00046E92 /* PhotosViewController.swift in Sources */,
+				8305BDA5276ABC8C00B3E960 /* CurrentUserService.swift in Sources */,
+				8305BDA72770C7AE00B3E960 /* TestUserService.swift in Sources */,
 				83F58FF42704B191002BCC38 /* publicExtansions.swift in Sources */,
 				838A1A1C2711F5DC00046E92 /* PhotosTableViewCell.swift in Sources */,
 				83F58FF62704C0B1002BCC38 /* CGFloatConstants.swift in Sources */,
+				8305BDA1276ABAF300B3E960 /* UserService.swift in Sources */,
 				838A1A2427148CCF00046E92 /* PhotosCollectionViewCell.swift in Sources */,
 				83CE58C826EFFB9E00B419A3 /* ProfileHeaderView.swift in Sources */,
 				838A1A192710712D00046E92 /* PostTableViewCell.swift in Sources */,

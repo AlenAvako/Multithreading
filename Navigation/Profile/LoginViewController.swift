@@ -9,21 +9,24 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    var userName: String?
+    var userService: UserService = CurrentUserService()
+    
     lazy var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.toAutoLayout()
         return scrollView
     }()
     
     lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.toAutoLayout()
         return contentView
     }()
     
     lazy var mainLogo: UIImageView = {
         let mainLogo = UIImageView()
-        mainLogo.translatesAutoresizingMaskIntoConstraints = false
+        mainLogo.toAutoLayout()
         mainLogo.image = UIImage(named: "logo")
         mainLogo.contentMode = .scaleAspectFill
         return mainLogo
@@ -31,7 +34,7 @@ class LoginViewController: UIViewController {
     
     lazy var nameAndPasswordStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.toAutoLayout()
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.layer.borderColor = UIColor.lightGray.cgColor
@@ -45,7 +48,8 @@ class LoginViewController: UIViewController {
     
     lazy var nameTextField: UITextField = {
         let nameTextField = UITextField()
-        nameTextField.translatesAutoresizingMaskIntoConstraints = false
+        nameTextField.toAutoLayout()
+        nameTextField.addTarget(self, action: #selector(userLogin(_:)), for: .editingChanged)
         nameTextField.backgroundColor = .systemGray6
         nameTextField.textColor = UIColor.black
         nameTextField.autocapitalizationType = .none
@@ -60,7 +64,7 @@ class LoginViewController: UIViewController {
     
     lazy var passwordTextField: UITextField = {
         let passwordTextField = UITextField()
-        passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.toAutoLayout()
         passwordTextField.backgroundColor = .systemGray6
         passwordTextField.textColor = UIColor.black
         passwordTextField.autocapitalizationType = .none
@@ -69,14 +73,12 @@ class LoginViewController: UIViewController {
         passwordTextField.indent(size: 15)
         passwordTextField.placeholder = "Password"
         passwordTextField.returnKeyType = UIReturnKeyType.done
-//        passwordTextField.layer.borderColor = UIColor.lightGray.cgColor
-//        passwordTextField.layer.borderWidth = 0.5
         return passwordTextField
     }()
     
     lazy var LogInButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         button.addTarget(self, action: #selector(tap), for: .touchUpInside)
         button.setTitle("Log In", for: .normal)
         button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
@@ -89,6 +91,10 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         
         setupViews()
+        
+        #if DEBUG
+        userService = TestUserService()
+        #endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -114,10 +120,15 @@ class LoginViewController: UIViewController {
     
 //    MARK: objc func
     @objc private func tap() {
-        let  profileVC = ProfileViewController()
+        let profileVC = ProfileViewController(user: userService, name: userName ?? "unknown")
         navigationController?.pushViewController(profileVC, animated: true)
+        
     }
-
+    
+    @objc private func userLogin(_ textField: UITextField) {
+        guard let text = textField.text else { return }
+        userName = text
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -169,8 +180,6 @@ extension LoginViewController: UITextFieldDelegate {
         passwordTextField.delegate = self
         passwordTextField.tag = 1
         
-        
-        
         NSLayoutConstraint.activate([
             nameTextField.leadingAnchor.constraint(equalTo: nameAndPasswordStackView.leadingAnchor),
             nameTextField.trailingAnchor.constraint(equalTo: nameAndPasswordStackView.trailingAnchor),
@@ -201,6 +210,7 @@ extension LoginViewController {
             loginScrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
         }
     }
+    
     @objc private func keybordWillHide() {
         loginScrollView.contentInset.bottom = .zero
         loginScrollView.verticalScrollIndicatorInsets = .zero
