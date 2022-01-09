@@ -11,7 +11,20 @@ import StorageService
 import iOSIntPackage
 
 class ProfileViewController: UIViewController {
-
+    
+    let user: UserService
+    var myUser: User?
+    
+    init(user: UserService, name: String) {
+        self.user = user
+        self.myUser = user.checkUser(name)
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .lightGray
@@ -76,7 +89,6 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 1 {
-            
             let cell = postTableView.dequeueReusableCell(withIdentifier: PostTableViewCell.id, for: indexPath) as! PostTableViewCell
             cell.configureCell(title: arrayOfPosts[indexPath.row].author,
                                image: arrayOfPosts[indexPath.row].image,
@@ -104,7 +116,6 @@ extension ProfileViewController: UITableViewDataSource {
                     }
                 }
             }
-            
             return cell
         } else {
             let cell = postTableView.dequeueReusableCell(withIdentifier: PhotosTableViewCell.id, for: indexPath) as! PhotosTableViewCell
@@ -118,6 +129,9 @@ extension ProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id) as! ProfileHeaderView
+            headerView.nameLabel.text = myUser?.name
+            headerView.profileImage.image = UIImage(named: myUser?.avatar ?? "notFound")
+            headerView.statusLabel.text = myUser?.status
             return headerView
         }
         return nil

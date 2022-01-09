@@ -9,18 +9,9 @@ import SnapKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     
-    override init(reuseIdentifier: String?) {
-        super.init(reuseIdentifier: reuseIdentifier)
-        addView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    static let id = "ProfileHeaderView"
     
     private var statusText: String = ""
-    
-    static let id = "ProfileHeaderView"
     
     lazy var backgroudForAvatar: UIView = {
         let background = UIView()
@@ -45,7 +36,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     //        MARK: Profile image
     lazy var profileImage: UIImageView = {
         let profileImage = UIImageView()
-        profileImage.translatesAutoresizingMaskIntoConstraints = false
+        profileImage.toAutoLayout()
         profileImage.image = UIImage(named: "Ava")
         profileImage.contentMode = .scaleAspectFill
         profileImage.layer.borderColor = UIColor.white.cgColor
@@ -60,16 +51,12 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     //        MARK: Status button
     lazy var getStatusButton: UIButton = {
         let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.toAutoLayout()
         button.addTarget(self,
                          action: #selector(getStatus(sender:)),
                          for: .touchUpInside)
         button.backgroundColor = UIColor(named: "appBlue")
         button.setTitle("Set status", for: .normal)
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowRadius = 4
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOpacity = 0.7
         button.layer.cornerRadius = 4
         return button
         
@@ -78,7 +65,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     //        MARK: Status Label
     lazy var nameLabel: UILabel = {
         let name = UILabel()
-        name.translatesAutoresizingMaskIntoConstraints = false
+        name.toAutoLayout()
         name.text = "Clint Barton"
         name.font = UIFont.systemFont(ofSize: 18,
                                       weight: .bold)
@@ -89,7 +76,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     //        MARK: Add status text field
     lazy var statusLabel: UILabel = {
         let statusLabel = UILabel()
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
+        statusLabel.toAutoLayout()
         statusLabel.text = "Waiting for something"
         statusLabel.font = UIFont.systemFont(ofSize: 14,
                                              weight: .regular)
@@ -99,7 +86,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     //        MARK: Add status text field
     lazy var addStatus: UITextField = {
         let addStatus = UITextField()
-        addStatus.translatesAutoresizingMaskIntoConstraints = false
+        addStatus.toAutoLayout()
         addStatus.addTarget(self,
                             action: #selector(statusTextChanged(_:)),
                             for: .editingChanged)
@@ -113,35 +100,43 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
         return addStatus
     }()
     
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        addView()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func addView() {
         addStatus.delegate = self
         contentView.addSubviews(getStatusButton, nameLabel, statusLabel, addStatus, backgroudForAvatar, profileImage, xMarkButton)
         
         profileImage.snp.makeConstraints {
-            $0.leading.top.equalToSuperview().offset(leadingIndent)
+            $0.leading.top.equalTo(self).offset(leadingIndent)
             $0.size.equalTo(CGSize(width: 100, height: 100))
         }
         
         nameLabel.snp.makeConstraints {
             $0.leading.equalTo(profileImage.snp.trailing).offset(20)
-            $0.top.equalToSuperview().offset(27)
+            $0.top.equalTo(self).offset(27)
         }
         
         getStatusButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.leading.trailing.equalTo(self).inset(16)
             $0.top.equalTo(profileImage.snp.bottom).offset(42)
             $0.height.equalTo(50)
         }
         
         statusLabel.snp.makeConstraints {
             $0.leading.equalTo(profileImage.snp.trailing).offset(20)
-            $0.trailing.equalToSuperview().offset(trailingIndent)
             $0.bottom.equalTo(addStatus.snp.top).offset(-6)
         }
         
         addStatus.snp.makeConstraints {
             $0.leading.equalTo(profileImage.snp.trailing).offset(20)
-            $0.trailing.equalToSuperview().offset(trailingIndent)
+            $0.trailing.equalTo(self).inset(16)
             $0.bottom.equalTo(getStatusButton.snp.top).offset(-10)
             $0.height.equalTo(40)
         }
@@ -171,6 +166,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
         } else {
             statusLabel.text = statusText
             addStatus.resignFirstResponder()
+            addStatus.text?.removeAll()
         }
     }
     
@@ -187,7 +183,6 @@ extension ProfileHeaderView {
         UIView.animate(withDuration: 0.5, delay: 0) {
             self.backgroudForAvatar.alpha = 0.8
             self.profileImage.center = CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY)
-//            self.profileImage.frame = CGRect(origin: CGPoint(x: UIScreen.main.bounds.midX, y: UIScreen.main.bounds.midY), size: CGSize(width: 200, height: 200))
             self.profileImage.transform = CGAffineTransform(scaleX: self.frame.width / 100, y: self.frame.width / 100)
             self.profileImage.layer.borderWidth = 0
             self.profileImage.layer.cornerRadius = 0

@@ -13,7 +13,7 @@ protocol PhotosTableViewCellDelegate: AnyObject {
 
 class PhotosTableViewCell: UITableViewCell {
     
-    static let id =  "PhotosTableViewCell"
+    static let id = "PhotosTableViewCell"
     
     weak var delegate: PhotosTableViewCellDelegate?
 
@@ -87,7 +87,6 @@ class PhotosTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.toAutoLayout()
         self.selectionStyle = .none
         
         contentView.addSubviews(photosLabel, arrowButton, stackView)
@@ -120,13 +119,10 @@ extension PhotosTableViewCell {
             firstImage.widthAnchor.constraint(greaterThanOrEqualToConstant: (contentView.frame.width - 16) / 4),
             firstImage.heightAnchor.constraint(equalTo: firstImage.widthAnchor),
 
-            secondImage.widthAnchor.constraint(greaterThanOrEqualToConstant: (contentView.frame.width - 16) / 4),
             secondImage.heightAnchor.constraint(equalTo: firstImage.widthAnchor),
 
-            thirdImage.widthAnchor.constraint(greaterThanOrEqualToConstant: (contentView.frame.width - 16) / 4),
             thirdImage.heightAnchor.constraint(equalTo: firstImage.widthAnchor),
 
-            fourthImage.widthAnchor.constraint(greaterThanOrEqualToConstant: (contentView.frame.width - 16) / 4),
             fourthImage.heightAnchor.constraint(equalTo: firstImage.widthAnchor),
             
         ])
