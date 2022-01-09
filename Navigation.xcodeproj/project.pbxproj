@@ -18,6 +18,10 @@
 		835BB28D26E661FC00220593 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835BB28C26E661FC00220593 /* SceneDelegate.swift */; };
 		835BB29426E661FF00220593 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 835BB29326E661FF00220593 /* Assets.xcassets */; };
 		835BB29726E661FF00220593 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835BB29526E661FF00220593 /* LaunchScreen.storyboard */; };
+		8384AB512781F0250044592B /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB502781F0250044592B /* Checker.swift */; };
+		8384AB542781FCB70044592B /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB532781FCB70044592B /* LoginInspector.swift */; };
+		8384AB772789F5880044592B /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB762789F5880044592B /* LoginFactory.swift */; };
+		8384AB792789F6300044592B /* FirstLoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB782789F6300044592B /* FirstLoginFactory.swift */; };
 		838A1A192710712D00046E92 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A1A182710712D00046E92 /* PostTableViewCell.swift */; };
 		838A1A1C2711F5DC00046E92 /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A1A1B2711F5DC00046E92 /* PhotosTableViewCell.swift */; };
 		838A1A2027147A0100046E92 /* ArrayOfPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A1A1F27147A0100046E92 /* ArrayOfPhotos.swift */; };
@@ -95,6 +99,10 @@
 		835BB29326E661FF00220593 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		835BB29626E661FF00220593 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		835BB29826E661FF00220593 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8384AB502781F0250044592B /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		8384AB532781FCB70044592B /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
+		8384AB762789F5880044592B /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
+		8384AB782789F6300044592B /* FirstLoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstLoginFactory.swift; sourceTree = "<group>"; };
 		838A1A182710712D00046E92 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		838A1A1B2711F5DC00046E92 /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
 		838A1A1F27147A0100046E92 /* ArrayOfPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayOfPhotos.swift; sourceTree = "<group>"; };
@@ -200,12 +208,14 @@
 		835BB28926E661FC00220593 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				8384AB752789F5750044592B /* LoginFactory */,
+				8384AB522781FB970044592B /* LoginChecker */,
 				8305BD9F276ABADB00B3E960 /* UserService */,
 				838A1A1A2711F39B00046E92 /* Photo galery */,
 				838A1A17271070F200046E92 /* Post */,
 				83CE58C626EFFB7D00B419A3 /* Profile */,
-				835BB28A26E661FC00220593 /* AppDelegate.swift */,
 				835BB28C26E661FC00220593 /* SceneDelegate.swift */,
+				835BB28A26E661FC00220593 /* AppDelegate.swift */,
 				83CE58C426ED02E000B419A3 /* InfoViewController.swift */,
 				83CE58C026EBC08A00B419A3 /* PostViewController.swift */,
 				83CE58BC26EBBE6C00B419A3 /* FeedViewController.swift */,
@@ -215,6 +225,24 @@
 				83F58FEE27039A5D002BCC38 /* Utilit */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		8384AB522781FB970044592B /* LoginChecker */ = {
+			isa = PBXGroup;
+			children = (
+				8384AB502781F0250044592B /* Checker.swift */,
+				8384AB532781FCB70044592B /* LoginInspector.swift */,
+			);
+			path = LoginChecker;
+			sourceTree = "<group>";
+		};
+		8384AB752789F5750044592B /* LoginFactory */ = {
+			isa = PBXGroup;
+			children = (
+				8384AB762789F5880044592B /* LoginFactory.swift */,
+				8384AB782789F6300044592B /* FirstLoginFactory.swift */,
+			);
+			path = LoginFactory;
 			sourceTree = "<group>";
 		};
 		838A1A17271070F200046E92 /* Post */ = {
@@ -521,18 +549,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8384AB542781FCB70044592B /* LoginInspector.swift in Sources */,
 				83F58FF027039C67002BCC38 /* LoginViewController.swift in Sources */,
+				8384AB512781F0250044592B /* Checker.swift in Sources */,
 				83CE58C126EBC08A00B419A3 /* PostViewController.swift in Sources */,
 				835BB28B26E661FC00220593 /* AppDelegate.swift in Sources */,
 				838A1A2027147A0100046E92 /* ArrayOfPhotos.swift in Sources */,
 				835BB28D26E661FC00220593 /* SceneDelegate.swift in Sources */,
 				83CE58BF26EBBF3600B419A3 /* ProfileViewController.swift in Sources */,
 				83CE58C526ED02E000B419A3 /* InfoViewController.swift in Sources */,
+				8384AB792789F6300044592B /* FirstLoginFactory.swift in Sources */,
 				8305BDA3276ABB2A00B3E960 /* User.swift in Sources */,
 				83CE58BD26EBBE6C00B419A3 /* FeedViewController.swift in Sources */,
 				838A1A2227148BFC00046E92 /* PhotosViewController.swift in Sources */,
 				8305BDA5276ABC8C00B3E960 /* CurrentUserService.swift in Sources */,
 				8305BDA72770C7AE00B3E960 /* TestUserService.swift in Sources */,
+				8384AB772789F5880044592B /* LoginFactory.swift in Sources */,
 				83F58FF42704B191002BCC38 /* publicExtansions.swift in Sources */,
 				838A1A1C2711F5DC00046E92 /* PhotosTableViewCell.swift in Sources */,
 				83F58FF62704C0B1002BCC38 /* CGFloatConstants.swift in Sources */,

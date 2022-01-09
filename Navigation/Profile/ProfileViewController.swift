@@ -130,7 +130,7 @@ extension ProfileViewController: UITableViewDelegate {
         if section == 0 {
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.id) as! ProfileHeaderView
             headerView.nameLabel.text = myUser?.name
-            headerView.profileImage.image = UIImage(named: myUser?.avatar ?? "notFound")
+            headerView.profileImage.image = UIImage(named: myUser?.avatar ?? "Ava")
             headerView.statusLabel.text = myUser?.status
             return headerView
         }
@@ -145,8 +145,6 @@ extension ProfileViewController: UITableViewDelegate {
         }
     }
 }
-
-
 
 extension ProfileViewController: PhotosTableViewCellDelegate {
     func didSelectButton() {

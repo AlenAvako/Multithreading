@@ -204,5 +204,4 @@ extension ProfileHeaderView {
             self.profileImage.layer.cornerRadius = 50
         }
     }
-
 }
