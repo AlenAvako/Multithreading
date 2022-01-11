@@ -17,11 +17,7 @@ class Checker {
     private let pswrd = "123456"
     
     func checker(name: String, password: String) {
-        if pswrd == password && login == name {
-            isAuthorized = true
-        } else {
-            isAuthorized = false
-        }
+        isAuthorized = pswrd == password && login == name
     }
     
     private init() {}

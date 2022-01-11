@@ -13,10 +13,6 @@ class LoginInspector: LoginViewControllerDelegate {
     func checkLogin(name: String, password: String) -> Bool {
         checker.checker(name: name, password: password)
         
-        if checker.isAuthorized == true {
-            return true
-        } else {
-            return false
-        }
+        return checker.isAuthorized
     }
 }

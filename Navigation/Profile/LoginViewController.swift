@@ -137,10 +137,20 @@ class LoginViewController: UIViewController {
         navigationController?.pushViewController(profileVC, animated: true)
     }
     
+    private func logInPasswordAlert() {
+        let alert = UIAlertController(title: "Вход не выполнен", message: "Неверный Логин или Пароль!", preferredStyle: .alert)
+        let tryMore = UIAlertAction(title: "Попробовать еще", style: .default, handler: nil)
+        alert.addAction(tryMore)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 //    MARK: objc func
     @objc private func tap() {
-        delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "")
-        openProfileViewController(name: userName)
+        if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") == true {
+            openProfileViewController(name: userName)
+        } else {
+            logInPasswordAlert()
+        }
     }
     
     @objc private func userLogin(_ textField: UITextField) {
