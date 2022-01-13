@@ -146,7 +146,7 @@ class LoginViewController: UIViewController {
     
 //    MARK: objc func
     @objc private func tap() {
-        if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") == true {
+        if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") ?? false {
             openProfileViewController(name: userName)
         } else {
             logInPasswordAlert()
