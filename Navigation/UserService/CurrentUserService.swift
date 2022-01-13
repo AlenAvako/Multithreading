@@ -11,9 +11,8 @@ class CurrentUserService: UserService {
     var currentUser = User(name: "Alen Avako", avatar: "picture19", status: "Hello world")
     
     func checkUser(_ name: String) -> User {
-        if name == self.currentUser.name {
-            return self.currentUser
-        }
-        return User(name: "unknown", avatar: "unknown", status: "unknown")
+        guard name == self.currentUser.name else { return User(name: "unknown", avatar: "notFound", status: "unknown") }
+
+        return currentUser
     }
 }

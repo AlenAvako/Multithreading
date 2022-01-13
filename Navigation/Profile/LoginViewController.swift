@@ -7,10 +7,21 @@
 
 import UIKit
 
+protocol LoginViewControllerDelegate: AnyObject {
+    func checkLogin(name: String, password: String) -> Bool
+}
+
 class LoginViewController: UIViewController {
     
+    weak var delegate: LoginViewControllerDelegate?
+    
+    var isAuthorized: Bool?
+    
     var userName: String?
+    var userPassword: String?
     var userService: UserService = CurrentUserService()
+    
+    let loginInspector = LoginInspector()
     
     lazy var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -65,6 +76,7 @@ class LoginViewController: UIViewController {
     lazy var passwordTextField: UITextField = {
         let passwordTextField = UITextField()
         passwordTextField.toAutoLayout()
+        passwordTextField.addTarget(self, action: #selector(userPswrd(_:)), for: .editingChanged)
         passwordTextField.backgroundColor = .systemGray6
         passwordTextField.textColor = UIColor.black
         passwordTextField.autocapitalizationType = .none
@@ -92,6 +104,8 @@ class LoginViewController: UIViewController {
         
         setupViews()
         
+        self.delegate = loginInspector
+        
         #if DEBUG
         userService = TestUserService()
         #endif
@@ -118,16 +132,35 @@ class LoginViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
+    private func openProfileViewController(name: String?) {
+        let profileVC = ProfileViewController(user: userService, name: name ?? "unknown")
+        navigationController?.pushViewController(profileVC, animated: true)
+    }
+    
+    private func logInPasswordAlert() {
+        let alert = UIAlertController(title: "Вход не выполнен", message: "Неверный Логин или Пароль!", preferredStyle: .alert)
+        let tryMore = UIAlertAction(title: "Попробовать еще", style: .default, handler: nil)
+        alert.addAction(tryMore)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 //    MARK: objc func
     @objc private func tap() {
-        let profileVC = ProfileViewController(user: userService, name: userName ?? "unknown")
-        navigationController?.pushViewController(profileVC, animated: true)
-        
+        if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") ?? false {
+            openProfileViewController(name: userName)
+        } else {
+            logInPasswordAlert()
+        }
     }
     
     @objc private func userLogin(_ textField: UITextField) {
+        guard let name = textField.text else { return }
+        userName = name
+    }
+    
+    @objc private func userPswrd(_ textField: UITextField) {
         guard let text = textField.text else { return }
-        userName = text
+        userPassword = text
     }
 }
 

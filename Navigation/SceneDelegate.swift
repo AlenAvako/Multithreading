@@ -11,6 +11,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    private let factory = FirstLoginFactory()
+    lazy var inspector = factory.addLoginFactory()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -24,6 +26,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         
         let profileVC = LoginViewController()
+        profileVC.delegate = inspector
         let profileView = UINavigationController(rootViewController: profileVC)
         let profileIcon = UIImage(named: "Profile")
         profileView.tabBarItem = UITabBarItem(title: "profile", image: profileIcon, tag: 0)
@@ -32,7 +35,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedView = UINavigationController(rootViewController: feedVC)
         let feedIcon = UIImage(named: "lenta")
         feedView.tabBarItem = UITabBarItem(title: "feed", image: feedIcon, tag: 1)
-        
         
         tabBarController.viewControllers = [feedView, profileView]
         
