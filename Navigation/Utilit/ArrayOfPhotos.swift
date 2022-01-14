@@ -7,7 +7,7 @@
 
 import UIKit
 
-var photosArray:[UIImage] = []
+var photosArray: [UIImage] = []
 
 func createPhotosArray() {
     photosArray = (0...19).compactMap { UIImage(named: "picture\($0)")?.resizeWithWidth(width: 300) }
