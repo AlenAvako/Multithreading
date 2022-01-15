@@ -10,6 +10,8 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
+    let photoArray = PhotoArrayCreator.shared
+    
     let facade = ImagePublisherFacade()
     
     var newPhotosArray: [UIImage] = []
@@ -32,10 +34,12 @@ class PhotosViewController: UIViewController {
         facade.subscribe(self)
         setupConstraints()
         
+        photoArray.createPhotosArray()
+        
         navigationController?.navigationBar.isHidden = false
         self.title = "Photo Gallery"
         
-        facade.addImagesWithTimer(time: 1, repeat: 10, userImages: photosArray)
+        facade.addImagesWithTimer(time: 1, repeat: 10, userImages: photoArray.photosArray)
     }
     
     deinit {

@@ -38,8 +38,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         tabBarController.viewControllers = [feedView, profileView]
         
-        createPhotosArray()
-        
         window?.rootViewController = tabBarController
     }
 

@@ -39,7 +39,7 @@ class PhotosTableViewCell: UITableViewCell {
     lazy var firstImage: UIImageView = {
         let image = UIImageView()
         image.toAutoLayout()
-        image.image = photosArray[0]
+        image.image = UIImage(named: "picture1")
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.cornerRadius = 6
@@ -49,7 +49,7 @@ class PhotosTableViewCell: UITableViewCell {
     lazy var secondImage: UIImageView = {
         let image = UIImageView()
         image.toAutoLayout()
-        image.image = photosArray[1]
+        image.image = UIImage(named: "picture2")
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.cornerRadius = 6
@@ -59,7 +59,7 @@ class PhotosTableViewCell: UITableViewCell {
     lazy var thirdImage: UIImageView = {
         let image = UIImageView()
         image.toAutoLayout()
-        image.image = photosArray[2]
+        image.image = UIImage(named: "picture3")
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.cornerRadius = 6
@@ -69,7 +69,7 @@ class PhotosTableViewCell: UITableViewCell {
     lazy var fourthImage: UIImageView = {
         let image = UIImageView()
         image.toAutoLayout()
-        image.image = photosArray[3]
+        image.image = UIImage(named: "picture9")
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         image.layer.cornerRadius = 6
