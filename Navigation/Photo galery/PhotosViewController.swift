@@ -6,20 +6,16 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.addSubview(photosCollectionView)
-        photosCollectionView.delegate = self
-        photosCollectionView.dataSource = self
-        setupConstraints()
-        
-        navigationController?.navigationBar.isHidden = false
-        self.title = "Photo Gallery"
-    }
     
+    let photoArray = PhotoArrayCreator.shared
+    
+    let facade = ImagePublisherFacade()
+    
+    var newPhotosArray: [UIImage] = []
+
     lazy var photosCollectionView: UICollectionView = {
         let photoCollectionLayout = UICollectionViewFlowLayout()
         photoCollectionLayout.scrollDirection = .vertical
@@ -30,9 +26,28 @@ class PhotosViewController: UIViewController {
         return photosCollection
     }()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(photosCollectionView)
+        photosCollectionView.delegate = self
+        photosCollectionView.dataSource = self
+        facade.subscribe(self)
+        setupConstraints()
+        
+        photoArray.createPhotosArray()
+        
+        navigationController?.navigationBar.isHidden = false
+        self.title = "Photo Gallery"
+        
+        facade.addImagesWithTimer(time: 1, repeat: 10, userImages: photoArray.photosArray)
+    }
+    
+    deinit {
+        facade.rechargeImageLibrary()
+    }
+    
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-                        
             photosCollectionView.topAnchor.constraint(equalTo: view.topAnchor),
             photosCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             photosCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -44,12 +59,12 @@ class PhotosViewController: UIViewController {
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photosArray.count
+        return newPhotosArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = photosCollectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.id, for: indexPath) as! PhotosCollectionViewCell
-        cell.configureCell(image: photosArray[indexPath.row])
+        cell.configureCell(image: newPhotosArray[indexPath.row])
         
         return cell
     }
@@ -72,5 +87,12 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+    }
+}
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    func receive(images: [UIImage]) {
+        newPhotosArray = images
+        photosCollectionView.reloadData()
     }
 }
