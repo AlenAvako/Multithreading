@@ -9,8 +9,8 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-    let buttonToPostView = UIButton()
-    let newButtonToPostView = UIButton()
+    let buttonToPostView = CustomButton(color: "colorSuper", title: "Hello", titleColor: .white, cornerRadius: 4)
+    let newButtonToPostView = CustomButton(color: "colorSuper", title: "World", titleColor: .white, cornerRadius: 4)
     
     let post = Post(title: "Новости")
     
@@ -37,23 +37,17 @@ class FeedViewController: UIViewController {
     }
     
     func configurePostViewButton() {
-        buttonToPostView.backgroundColor = UIColor(named: "appBlue")
-        buttonToPostView.setTitle("Новости", for: .normal)
-        buttonToPostView.addTarget(self, action: #selector(tap), for: .touchUpInside)
-        buttonToPostView.layer.shadowOffset = CGSize(width: 4, height: 4)
-        buttonToPostView.layer.shadowRadius = 4
-        buttonToPostView.layer.shadowColor = UIColor.black.cgColor
-        buttonToPostView.layer.shadowOpacity = 0.7
-        buttonToPostView.layer.cornerRadius = 4
+        buttonToPostView.tapButton = { [ weak self ] in
+            let postVC = PostViewController()
+            postVC.postTitle = self?.post.title
+            self?.navigationController?.pushViewController(postVC, animated: true)
+        }
         
-        newButtonToPostView.backgroundColor = UIColor(named: "appBlue")
-        newButtonToPostView.setTitle("Новости", for: .normal)
-        newButtonToPostView.addTarget(self, action: #selector(tap), for: .touchUpInside)
-        newButtonToPostView.layer.shadowOffset = CGSize(width: 4, height: 4)
-        newButtonToPostView.layer.shadowRadius = 4
-        newButtonToPostView.layer.shadowColor = UIColor.black.cgColor
-        newButtonToPostView.layer.shadowOpacity = 0.7
-        newButtonToPostView.layer.cornerRadius = 4
+        newButtonToPostView.tapButton = { [ weak self ] in
+            let postVC = PostViewController()
+            postVC.postTitle = self?.post.title
+            self?.navigationController?.pushViewController(postVC, animated: true)
+        }
         
         setButtonsConstraints()
     }
@@ -89,12 +83,6 @@ class FeedViewController: UIViewController {
             newButtonToPostView.trailingAnchor.constraint(equalTo: stackView.safeAreaLayoutGuide.trailingAnchor, constant: trailingIndent),
             newButtonToPostView.heightAnchor.constraint(equalToConstant: 50)
         ])
-    }
-//    MARK: objc func
-    @objc func tap() {
-        let postVC = PostViewController()
-        postVC.postTitle = post.title
-        navigationController?.pushViewController(postVC, animated: true)
     }
 }
 
