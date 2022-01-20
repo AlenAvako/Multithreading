@@ -11,6 +11,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
+    private let wordChecker = RandomWord()
     private let factory = FirstLoginFactory()
     lazy var inspector = factory.addLoginFactory()
 
@@ -31,12 +32,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let profileIcon = UIImage(named: "Profile")
         profileView.tabBarItem = UITabBarItem(title: "profile", image: profileIcon, tag: 0)
         
-        let feedVC = FeedViewController()
+        
+        let feedVC = FeedViewController(checker: wordChecker)
         let feedView = UINavigationController(rootViewController: feedVC)
         let feedIcon = UIImage(named: "lenta")
         feedView.tabBarItem = UITabBarItem(title: "feed", image: feedIcon, tag: 1)
         
-        tabBarController.viewControllers = [feedView, profileView]
+        tabBarController.viewControllers = [profileView, feedView]
         
         window?.rootViewController = tabBarController
     }

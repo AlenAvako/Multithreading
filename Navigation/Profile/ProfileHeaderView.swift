@@ -52,6 +52,15 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     lazy var getStatusButton: CustomButton = {
         let button = CustomButton(color: "colorSuper", title: "Set status", titleColor: .white, cornerRadius: 4)
         button.toAutoLayout()
+        button.tapButton = { [self] in
+            if statusText.isEmpty {
+                return
+            } else {
+                statusLabel.text = statusText
+                addStatus.resignFirstResponder()
+                addStatus.text?.removeAll()
+            }
+        }
         return button
         
         
@@ -104,9 +113,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     }
     
     func addView() {
-        getStatusButton.tapButton = {
-            self.getStatus()
-        }
         
         addStatus.delegate = self
         contentView.addSubviews(getStatusButton, nameLabel, statusLabel, addStatus, backgroudForAvatar, profileImage, xMarkButton)
@@ -144,16 +150,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
-    }
-    
-    private func getStatus() {
-        if statusText.isEmpty {
-            return
-        } else {
-            statusLabel.text = statusText
-            addStatus.resignFirstResponder()
-            addStatus.text?.removeAll()
-        }
     }
     
     // MARK: objc funcs

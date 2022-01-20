@@ -92,6 +92,13 @@ class LoginViewController: UIViewController {
         let button = CustomButton(color: "colorSuper", title: "Log In", titleColor: .white, cornerRadius: 10)
         let loginVC = LoginViewController()
         button.toAutoLayout()
+        button.tapButton = { [self] in
+            if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") ?? false {
+                openProfileViewController(name: userName)
+            } else {
+                logInPasswordAlert()
+            }
+        }
         button.clipsToBounds = true
         return button
     }()
@@ -142,13 +149,6 @@ class LoginViewController: UIViewController {
     }
     
 //    MARK: objc func
-    private func tap() {
-        if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") ?? false {
-            openProfileViewController(name: userName)
-        } else {
-            logInPasswordAlert()
-        }
-    }
     
     @objc private func userLogin(_ textField: UITextField) {
         guard let name = textField.text else { return }
@@ -163,9 +163,6 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     func setupViews() {
-        LogInButton.tapButton = {
-            self.tap()
-        }
         
         view.backgroundColor = .white
         
