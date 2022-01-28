@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     
     weak var delegate: LoginViewControllerDelegate?
     
+    var loginFactory: FirstLoginFactory?
+    
     var isAuthorized: Bool?
     
     var userName: String?
@@ -88,13 +90,17 @@ class LoginViewController: UIViewController {
         return passwordTextField
     }()
     
-    lazy var LogInButton: UIButton = {
-        let button = UIButton()
+    lazy var LogInButton: CustomButton = {
+        let button = CustomButton(color: "colorSuper", title: "Log In", titleColor: .white, cornerRadius: 10)
+        let loginVC = LoginViewController()
         button.toAutoLayout()
-        button.addTarget(self, action: #selector(tap), for: .touchUpInside)
-        button.setTitle("Log In", for: .normal)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
+        button.tapButton = { [self] in
+            if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") ?? false {
+                openProfileViewController(name: userName)
+            } else {
+                logInPasswordAlert()
+            }
+        }
         button.clipsToBounds = true
         return button
     }()
@@ -145,13 +151,6 @@ class LoginViewController: UIViewController {
     }
     
 //    MARK: objc func
-    @objc private func tap() {
-        if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") ?? false {
-            openProfileViewController(name: userName)
-        } else {
-            logInPasswordAlert()
-        }
-    }
     
     @objc private func userLogin(_ textField: UITextField) {
         guard let name = textField.text else { return }
@@ -166,6 +165,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     func setupViews() {
+        
         view.backgroundColor = .white
         
         view.addSubview(loginScrollView)

@@ -39,7 +39,7 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         self.title = "Photo Gallery"
         
-        facade.addImagesWithTimer(time: 1, repeat: 10, userImages: photoArray.photosArray)
+        facade.addImagesWithTimer(time: 1, repeat: 20, userImages: photoArray.photosArray)
     }
     
     deinit {
