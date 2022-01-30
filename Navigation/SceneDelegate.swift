@@ -12,33 +12,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
 
     private let factory = FirstLoginFactory()
-    lazy var inspector = factory.addLoginFactory()
+    private let appCoordinator = AppCoordinator()
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let scene = (scene as? UIWindowScene) else { return }
-        window = UIWindow(windowScene: scene)
-        window?.makeKeyAndVisible()
+        guard let _ = (scene as? UIWindowScene) else { return }
+        
+        if let windowScene = scene as? UIWindowScene {
+            self.window = UIWindow(windowScene: windowScene)
+            self.window?.rootViewController = appCoordinator.tabBarController
+            self.window?.makeKeyAndVisible()
+        }
+        
+        if let tabController = window?.rootViewController as? UITabBarController, let loginNavigation = tabController.viewControllers?.last as? UINavigationController, let loginController = loginNavigation.viewControllers.first as? LoginViewController {
 
-        let tabBarController = UITabBarController()
-        
-        
-        let profileVC = LoginViewController()
-        profileVC.delegate = inspector
-        let profileView = UINavigationController(rootViewController: profileVC)
-        let profileIcon = UIImage(named: "Profile")
-        profileView.tabBarItem = UITabBarItem(title: "profile", image: profileIcon, tag: 0)
-        
-        let feedVC = FeedViewController()
-        let feedView = UINavigationController(rootViewController: feedVC)
-        let feedIcon = UIImage(named: "lenta")
-        feedView.tabBarItem = UITabBarItem(title: "feed", image: feedIcon, tag: 1)
-        
-        tabBarController.viewControllers = [feedView, profileView]
-        
-        window?.rootViewController = tabBarController
+            loginController.loginFactory = factory
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

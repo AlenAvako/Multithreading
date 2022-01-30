@@ -8,6 +8,8 @@
 import UIKit
 
 class FirstLoginFactory: LoginFactory {
+    static let firstLoginFactory = FirstLoginFactory()
+    
     func addLoginFactory() -> LoginInspector {
         return LoginInspector()
     }
