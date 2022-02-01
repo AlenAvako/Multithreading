@@ -14,7 +14,7 @@ class Checker {
     var isAuthorized: Bool = false
     
     private let login = "1"
-    private let pswrd = "1"
+    private let pswrd = "12312"
     
     func checker(name: String, password: String) {
         isAuthorized = pswrd == password && login == name

@@ -10,11 +10,10 @@ import iOSIntPackage
 
 class PhotosViewController: UIViewController {
     
-    let photoArray = PhotoArrayCreator.shared
-    
-    let facade = ImagePublisherFacade()
-    
     var newPhotosArray: [UIImage] = []
+    
+    private let photoArray = PhotoArrayCreator.shared
+    private let facade = ImagePublisherFacade()
 
     lazy var photosCollectionView: UICollectionView = {
         let photoCollectionLayout = UICollectionViewFlowLayout()
@@ -39,11 +38,28 @@ class PhotosViewController: UIViewController {
         navigationController?.navigationBar.isHidden = false
         self.title = "Photo Gallery"
         
-        facade.addImagesWithTimer(time: 1, repeat: 10, userImages: photoArray.photosArray)
+        facade.addImagesWithTimer(time: 0.5, repeat: 20, userImages: photoArray.photosArray)
+        photosProcessor()
     }
     
     deinit {
         facade.rechargeImageLibrary()
+    }
+    
+    func photosProcessor() {
+        let timer = MyTimer()
+        
+        let imageProcessor = ImageProcessor()
+        
+        imageProcessor.processImagesOnThread(sourceImages: photoArray.photosArray, filter: .sepia(intensity: 10), qos: .userInteractive) { photoImageProcess in
+            for image in photoImageProcess {
+                if let photo = image {
+                    self.newPhotosArray.append(UIImage(cgImage: photo))
+                }
+            }
+            print("\(timer.stop()) seconds")
+        }
+        photosCollectionView.reloadData()
     }
     
     private func setupConstraints() {
@@ -92,7 +108,7 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout, UICollection
 
 extension PhotosViewController: ImageLibrarySubscriber {
     func receive(images: [UIImage]) {
-        newPhotosArray = images
+        photoArray.photosArray = images
         photosCollectionView.reloadData()
     }
 }

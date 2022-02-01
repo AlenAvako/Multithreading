@@ -22,7 +22,7 @@ public extension UIView {
 }
 
 public extension UITextField {
-    func indent(size:CGFloat) {
+    func indent(size: CGFloat) {
         self.leftView = UIView(frame: CGRect(x: self.frame.minX, y: self.frame.minY, width: size, height: self.frame.height))
         self.leftViewMode = .always
     }
@@ -57,5 +57,19 @@ extension UIImage {
         guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
         UIGraphicsEndImageContext()
         return result
+    }
+}
+
+extension String {
+    var digits:      String { return "0123456789" }
+    var lowercase:   String { return "abcdefghijklmnopqrstuvwxyz" }
+    var uppercase:   String { return "ABCDEFGHIJKLMNOPQRSTUVWXYZ" }
+    var letters:     String { return lowercase + uppercase }
+    var printable:   String { return digits + letters }
+    
+    mutating func replace(at index: Int, with character: Character) {
+        var stringArray = Array(self)
+        stringArray[index] = character
+        self = String(stringArray)
     }
 }
