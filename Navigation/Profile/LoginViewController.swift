@@ -15,6 +15,8 @@ class LoginViewController: UIViewController {
     
     weak var delegate: LoginViewControllerDelegate?
     
+    var loginFactory: FirstLoginFactory?
+    
     var isAuthorized: Bool?
     
     var userName: String?
@@ -22,6 +24,8 @@ class LoginViewController: UIViewController {
     var userService: UserService = CurrentUserService()
     
     let loginInspector = LoginInspector()
+    
+    let bruteForce = BruteForce()
     
     lazy var loginScrollView: UIScrollView = {
         let scrollView = UIScrollView()
@@ -88,15 +92,53 @@ class LoginViewController: UIViewController {
         return passwordTextField
     }()
     
-    lazy var LogInButton: UIButton = {
-        let button = UIButton()
+    lazy var LogInButton: CustomButton = {
+        let button = CustomButton(color: "colorSuper", title: "Log In", titleColor: .white, cornerRadius: 10)
         button.toAutoLayout()
-        button.addTarget(self, action: #selector(tap), for: .touchUpInside)
-        button.setTitle("Log In", for: .normal)
-        button.setBackgroundImage(UIImage(named: "blue_pixel"), for: .normal)
-        button.layer.cornerRadius = 10
+        button.tapButton = { [self] in
+            if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") ?? false {
+                openProfileViewController(name: userName)
+            } else {
+                logInPasswordAlert()
+            }
+        }
         button.clipsToBounds = true
+        button.alpha = 1
+        if button.isSelected || !button.isEnabled || button.isHighlighted { button.alpha = 0.8 }
         return button
+    }()
+    
+    lazy var passwordButtonPicker: CustomButton = {
+        let button = CustomButton(color: "colorSuper", title: "Подобрать пароль", titleColor: .white, cornerRadius: 10)
+        button.toAutoLayout()
+        button.tapButton = { [weak self] in
+            self?.activityIndicator.startAnimating()
+            self?.activityIndicator.isHidden = false
+            self?.passwordTextField.indent(size: 35)
+            self?.passwordTextField.placeholder = "Hacking password"
+            DispatchQueue.global().async {
+                self?.bruteForce.bruteForce(passwordToUnlock: "12312")
+                DispatchQueue.main.async {
+                    self?.activityIndicator.isHidden = true
+                    self?.activityIndicator.stopAnimating()
+                    self?.passwordTextField.text = self?.bruteForce.hackedPassword
+                    self?.passwordTextField.indent(size: 15)
+                    self?.passwordTextField.placeholder = "Password"
+                    self?.userPassword = self?.bruteForce.hackedPassword
+                }
+            }
+        }
+        button.clipsToBounds = true
+        button.alpha = 1
+        if button.isSelected || !button.isEnabled || button.isHighlighted { button.alpha = 0.8 }
+        return button
+    }()
+    
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.toAutoLayout()
+        indicator.style = .medium
+        return indicator
     }()
     
     override func viewDidLoad() {
@@ -106,9 +148,9 @@ class LoginViewController: UIViewController {
         
         self.delegate = loginInspector
         
-        #if DEBUG
+#if DEBUG
         userService = TestUserService()
-        #endif
+#endif
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -144,14 +186,7 @@ class LoginViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-//    MARK: objc func
-    @objc private func tap() {
-        if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") ?? false {
-            openProfileViewController(name: userName)
-        } else {
-            logInPasswordAlert()
-        }
-    }
+    //    MARK: objc func
     
     @objc private func userLogin(_ textField: UITextField) {
         guard let name = textField.text else { return }
@@ -166,6 +201,7 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     func setupViews() {
+        
         view.backgroundColor = .white
         
         view.addSubview(loginScrollView)
@@ -173,7 +209,7 @@ extension LoginViewController: UITextFieldDelegate {
         loginScrollView.addSubview(contentView)
         
         setupStackView()
-        contentView.addSubviews(mainLogo, nameAndPasswordStackView, LogInButton)
+        contentView.addSubviews(mainLogo, nameAndPasswordStackView, LogInButton, passwordButtonPicker, activityIndicator)
         
         NSLayoutConstraint.activate([
             loginScrollView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
@@ -197,17 +233,25 @@ extension LoginViewController: UITextFieldDelegate {
             nameAndPasswordStackView.topAnchor.constraint(equalTo: mainLogo.bottomAnchor, constant: 120),
             nameAndPasswordStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: trailingIndent),
             nameAndPasswordStackView.heightAnchor.constraint(equalToConstant: 100),
-
+            
             LogInButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: leadingIndent),
             LogInButton.topAnchor.constraint(equalTo: nameAndPasswordStackView.bottomAnchor, constant: 16),
             LogInButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: trailingIndent),
             LogInButton.heightAnchor.constraint(equalToConstant: 50),
-            LogInButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24)
+            
+            passwordButtonPicker.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            passwordButtonPicker.topAnchor.constraint(equalTo: LogInButton.bottomAnchor, constant: 10),
+            passwordButtonPicker.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            passwordButtonPicker.heightAnchor.constraint(equalToConstant: 50),
+            passwordButtonPicker.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -24),
+            
+            activityIndicator.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor, constant: 10),
+            activityIndicator.centerYAnchor.constraint(equalTo: passwordTextField.centerYAnchor)
         ])
     }
     
     func setupStackView() {
-
+        
         nameTextField.delegate = self
         nameTextField.tag = 0
         passwordTextField.delegate = self
@@ -217,7 +261,7 @@ extension LoginViewController: UITextFieldDelegate {
             nameTextField.leadingAnchor.constraint(equalTo: nameAndPasswordStackView.leadingAnchor),
             nameTextField.trailingAnchor.constraint(equalTo: nameAndPasswordStackView.trailingAnchor),
             nameTextField.heightAnchor.constraint(equalToConstant: 50),
-
+            
             passwordTextField.leadingAnchor.constraint(equalTo: nameAndPasswordStackView.leadingAnchor),
             passwordTextField.trailingAnchor.constraint(equalTo: nameAndPasswordStackView.trailingAnchor),
             passwordTextField.heightAnchor.constraint(equalToConstant: 50),

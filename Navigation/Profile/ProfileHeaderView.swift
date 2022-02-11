@@ -49,15 +49,18 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
         return profileImage
     }()
     //        MARK: Status button
-    lazy var getStatusButton: UIButton = {
-        let button = UIButton()
+    lazy var getStatusButton: CustomButton = {
+        let button = CustomButton(color: "colorSuper", title: "Set status", titleColor: .white, cornerRadius: 10)
         button.toAutoLayout()
-        button.addTarget(self,
-                         action: #selector(getStatus(sender:)),
-                         for: .touchUpInside)
-        button.backgroundColor = UIColor(named: "appBlue")
-        button.setTitle("Set status", for: .normal)
-        button.layer.cornerRadius = 4
+        button.tapButton = { [self] in
+            if statusText.isEmpty {
+                return
+            } else {
+                statusLabel.text = statusText
+                addStatus.resignFirstResponder()
+                addStatus.text?.removeAll()
+            }
+        }
         return button
         
         
@@ -110,6 +113,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
     }
     
     func addView() {
+        
         addStatus.delegate = self
         contentView.addSubviews(getStatusButton, nameLabel, statusLabel, addStatus, backgroudForAvatar, profileImage, xMarkButton)
         
@@ -148,28 +152,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView, UITextFieldDelegate {
         return true
     }
     
-    private func animateView(_ viewToAnimate: UIView) {
-        UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.2, options: .curveEaseIn, animations: {
-            viewToAnimate.transform = CGAffineTransform(scaleX: 0.98, y: 0.98)
-        }) { (_) in
-            UIView.animate(withDuration: 0.1, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.5, options: .curveEaseIn, animations: {
-                viewToAnimate.transform = CGAffineTransform(scaleX: 1, y: 1)
-            }, completion: nil)
-        }
-    }
-    
     // MARK: objc funcs
-    @objc private func getStatus(sender: UIButton) {
-        self.animateView(sender)
-        if statusText.isEmpty {
-            return
-        } else {
-            statusLabel.text = statusText
-            addStatus.resignFirstResponder()
-            addStatus.text?.removeAll()
-        }
-    }
-    
     @objc private func statusTextChanged(_ textField: UITextField) {
         guard let text = textField.text else { return }
         statusText = text

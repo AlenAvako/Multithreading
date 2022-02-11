@@ -23,8 +23,7 @@ class PostViewController: UIViewController {
     }
     
     func openInfo() {
-        
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
             action: #selector(addNew))
