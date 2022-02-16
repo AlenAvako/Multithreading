@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 protocol PhotosTableViewCellDelegate: AnyObject {
     func didSelectButton()
@@ -16,16 +17,17 @@ class PhotosTableViewCell: UITableViewCell {
     static let id = "PhotosTableViewCell"
     
     weak var delegate: PhotosTableViewCellDelegate?
-
-    lazy var stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.toAutoLayout()
-        stack.axis = .horizontal
-        stack.distribution = .fillEqually
-        stack.alignment = .center
-        stack.spacing = 8
-        return stack
-    }()
+    
+    private let photoArray = [
+        UIImage(named: "picture0"),
+        UIImage(named: "picture1"),
+        UIImage(named: "picture2"),
+        UIImage(named: "picture3"),
+        UIImage(named: "picture4"),
+        UIImage(named: "picture5"),
+        UIImage(named: "picture6"),
+        UIImage(named: "picture7"),
+    ]
 
     lazy var photosLabel: UILabel = {
         let photos = UILabel()
@@ -35,45 +37,16 @@ class PhotosTableViewCell: UITableViewCell {
         photos.textColor = .black
         return photos
     }()
-
-    lazy var firstImage: UIImageView = {
-        let image = UIImageView()
-        image.toAutoLayout()
-        image.image = UIImage(named: "picture1")
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        image.layer.cornerRadius = 6
-        return image
-    }()
-
-    lazy var secondImage: UIImageView = {
-        let image = UIImageView()
-        image.toAutoLayout()
-        image.image = UIImage(named: "picture2")
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        image.layer.cornerRadius = 6
-        return image
-    }()
-
-    lazy var thirdImage: UIImageView = {
-        let image = UIImageView()
-        image.toAutoLayout()
-        image.image = UIImage(named: "picture3")
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        image.layer.cornerRadius = 6
-        return image
-    }()
-
-    lazy var fourthImage: UIImageView = {
-        let image = UIImageView()
-        image.toAutoLayout()
-        image.image = UIImage(named: "picture9")
-        image.contentMode = .scaleAspectFill
-        image.clipsToBounds = true
-        image.layer.cornerRadius = 6
-        return image
+    
+    lazy var photosCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.toAutoLayout()
+        collectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.id)
+        collectionView.backgroundColor = .white
+        collectionView.showsHorizontalScrollIndicator = false
+        return collectionView
     }()
 
     lazy var arrowButton: UIButton = {
@@ -89,8 +62,10 @@ class PhotosTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.selectionStyle = .none
         
-        contentView.addSubviews(photosLabel, arrowButton, stackView)
-        stackView.addArrangedSubviews(firstImage, secondImage, thirdImage, fourthImage)
+        photosCollectionView.dataSource = self
+        photosCollectionView.delegate = self
+        
+        contentView.addSubviews(photosLabel, arrowButton, photosCollectionView)
         setupViews()
     }
 
@@ -101,31 +76,21 @@ class PhotosTableViewCell: UITableViewCell {
 
 extension PhotosTableViewCell {
     func setupViews() {
-
-        NSLayoutConstraint.activate([
-            photosLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: viewsIndent),
-            photosLabel.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: viewsIndent),
-
-            arrowButton.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: bottomIndent),
-            arrowButton.centerYAnchor.constraint(equalTo: photosLabel.centerYAnchor),
-            arrowButton.heightAnchor.constraint(equalToConstant: 24),
-            arrowButton.widthAnchor.constraint(equalTo: arrowButton.heightAnchor),
-
-            stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: viewsIndent),
-            stackView.topAnchor.constraint(equalTo: photosLabel.bottomAnchor, constant: viewsIndent),
-            stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: bottomIndent),
-            stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: bottomIndent),
-            
-            firstImage.widthAnchor.constraint(greaterThanOrEqualToConstant: (contentView.frame.width - 16) / 4),
-            firstImage.heightAnchor.constraint(equalTo: firstImage.widthAnchor),
-
-            secondImage.heightAnchor.constraint(equalTo: firstImage.widthAnchor),
-
-            thirdImage.heightAnchor.constraint(equalTo: firstImage.widthAnchor),
-
-            fourthImage.heightAnchor.constraint(equalTo: firstImage.widthAnchor),
-            
-        ])
+        photosLabel.snp.makeConstraints {
+            $0.top.leading.equalTo(self.contentView).offset(viewsIndent)
+        }
+        
+        arrowButton.snp.makeConstraints {
+            $0.trailing.equalTo(self.contentView.snp.trailing).offset(-12)
+            $0.centerY.equalTo(photosLabel.snp.centerY)
+            $0.height.width.equalTo(24)
+        }
+        
+        photosCollectionView.snp.makeConstraints {
+            $0.top.equalTo(photosLabel.snp.bottom).offset(viewsIndent)
+            $0.leading.trailing.bottom.equalTo(self.contentView)
+            $0.height.equalTo(100)
+        }
     }
     
     override func prepareForReuse() {
@@ -134,6 +99,35 @@ extension PhotosTableViewCell {
     
     @objc func openView() {
         self.delegate?.didSelectButton()
+    }
+}
+
+extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.id, for: indexPath) as! PhotosCollectionViewCell
+        cell.configureCell(image: photoArray[indexPath.row]!)
+        cell.contentView.roundCornersWithRadius(6)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt IndexPath: IndexPath) -> CGSize {
+        let width: CGFloat
+        let height: CGFloat
+        width = (collectionView.frame.width - viewsIndent * 2 - 8 * 3)/4
+        height = collectionView.frame.height - viewsIndent * 2
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: viewsIndent, bottom: viewsIndent, right: viewsIndent)
     }
 }
 

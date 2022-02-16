@@ -52,7 +52,7 @@ class ProfileViewController: UIViewController {
         return postTableView
     }()
     
-    func setupTableView() {
+    private func setupTableView() {
         view.addSubview(postTableView)
         postTableView.contentInsetAdjustmentBehavior = .scrollableAxes
         postTableView.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +61,7 @@ class ProfileViewController: UIViewController {
         postTableView.delegate = self
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         NSLayoutConstraint.activate([
             postTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             postTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

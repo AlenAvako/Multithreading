@@ -13,7 +13,7 @@ class Checker {
     
     var isAuthorized: Bool = false
     
-    private let login = "1"
+    private let login = "Alen Avako"
     private let pswrd = "12312"
     
     func checker(name: String, password: String) {

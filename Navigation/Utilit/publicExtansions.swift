@@ -19,6 +19,26 @@ public extension UIView {
     func toAutoLayout() {
         translatesAutoresizingMaskIntoConstraints = false
     }
+    
+    func roundCornersWithRadius(_ radius: CGFloat, top: Bool? = true, bottom: Bool? = true, shadowEnabled: Bool = true) {
+        var maskedCorners = CACornerMask()
+        
+        clipsToBounds = true
+
+        switch (top, bottom) {
+        case (true, false):
+            maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+        case (false, true):
+            maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        case (true, true):
+            maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        default:
+            break
+        }
+        
+        layer.cornerRadius = radius
+        layer.maskedCorners = maskedCorners
+    }
 }
 
 public extension UITextField {
