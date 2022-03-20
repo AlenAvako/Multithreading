@@ -6,6 +6,7 @@
 //
 
 import SnapKit
+import UIKit
 
 class FeedViewController: UIViewController {
     
@@ -14,6 +15,9 @@ class FeedViewController: UIViewController {
     let post = Post(title: "Новости")
     
     let stackView = UIStackView()
+    
+    let backgroundTimer = BackgroundTimer()
+    let customTimer = CustomTimer()
     
     private var viewModel: FeedViewOutput
     
@@ -45,6 +49,13 @@ class FeedViewController: UIViewController {
         label.numberOfLines = 0
         return label
     }()
+    
+    private lazy var timerLabel: UILabel = {
+        let label = UILabel()
+        label.toAutoLayout()
+        label.textAlignment = .center
+        return label
+    }()
 
     private let buttonToPostView = CustomButton(color: "colorSuper", title: "Hello", titleColor: .white, cornerRadius: 10)
     private let newButtonToPostView = CustomButton(color: "colorSuper", title: "World", titleColor: .white, cornerRadius: 10)
@@ -64,10 +75,11 @@ class FeedViewController: UIViewController {
         self.view.backgroundColor = .white
         
         configureStackView()
+        startTimer()
     }
     
     private func configureStackView() {
-        view.addSubviews(stackView, customTextField, customButton, statusLabel)
+        view.addSubviews(stackView, customTextField, customButton, statusLabel, timerLabel)
 
         stackView.axis = .vertical
         stackView.alignment = .center
@@ -76,6 +88,8 @@ class FeedViewController: UIViewController {
         
         setStackViewConstraint()
         addButtonToStackView()
+        
+        backgroundTimer.startTimer(viewController: self)
     }
     
     private func configurePostViewButton() {
@@ -125,6 +139,11 @@ class FeedViewController: UIViewController {
             $0.center.equalTo(view.snp.center)
             $0.leading.trailing.equalTo(view).inset(16)
         }
+        
+        timerLabel.snp.makeConstraints {
+            $0.centerX.equalTo(view.snp.centerX)
+            $0.top.equalTo(customButton.snp.bottom).offset(16)
+        }
     }
     
     private func setButtonsConstraints() {
@@ -159,6 +178,18 @@ class FeedViewController: UIViewController {
                 self.statusLabel.textColor = .purple
             }
         }
+    }
+    
+    private func startTimer() {
+        let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+            self.timerLabel.text = self.customTimer.setTimer()
+            
+            if self.timerLabel.text == "00:00" {
+                self.customTextField.text = self.customTimer.getRandomPost()
+                self.customWord = self.customTextField.text ?? ""
+                self.checkWord()
+            }
+        })
     }
     
     @objc private func saveCustomWord() {

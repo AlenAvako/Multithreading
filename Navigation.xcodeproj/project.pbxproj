@@ -27,6 +27,9 @@
 		835BB28D26E661FC00220593 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835BB28C26E661FC00220593 /* SceneDelegate.swift */; };
 		835BB29426E661FF00220593 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 835BB29326E661FF00220593 /* Assets.xcassets */; };
 		835BB29726E661FF00220593 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835BB29526E661FF00220593 /* LaunchScreen.storyboard */; };
+		835D46FB27BC0BD7007688E4 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FA27BC0BD7007688E4 /* CustomAlert.swift */; };
+		835D46FD27BC2365007688E4 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FC27BC2365007688E4 /* BackgroundTimer.swift */; };
+		835D46FF27BD3CB0007688E4 /* CustomTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FE27BD3CB0007688E4 /* CustomTimer.swift */; };
 		8384AB512781F0250044592B /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB502781F0250044592B /* Checker.swift */; };
 		8384AB542781FCB70044592B /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB532781FCB70044592B /* LoginInspector.swift */; };
 		8384AB772789F5880044592B /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB762789F5880044592B /* LoginFactory.swift */; };
@@ -119,6 +122,9 @@
 		835BB29326E661FF00220593 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		835BB29626E661FF00220593 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		835BB29826E661FF00220593 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		835D46FA27BC0BD7007688E4 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
+		835D46FC27BC2365007688E4 /* BackgroundTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
+		835D46FE27BD3CB0007688E4 /* CustomTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimer.swift; sourceTree = "<group>"; };
 		8384AB502781F0250044592B /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		8384AB532781FCB70044592B /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		8384AB762789F5880044592B /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
@@ -197,6 +203,9 @@
 			children = (
 				83349A132796072900CAB9A0 /* CustomButton.swift */,
 				8301D0872799CD010008AF9B /* CustomTextField.swift */,
+				835D46FA27BC0BD7007688E4 /* CustomAlert.swift */,
+				835D46FC27BC2365007688E4 /* BackgroundTimer.swift */,
+				835D46FE27BD3CB0007688E4 /* CustomTimer.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -282,13 +291,13 @@
 		835BB28926E661FC00220593 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				835BB28C26E661FC00220593 /* SceneDelegate.swift */,
+				835BB28A26E661FC00220593 /* AppDelegate.swift */,
 				8384AB522781FB970044592B /* LoginChecker */,
 				8305BD9F276ABADB00B3E960 /* UserService */,
 				838A1A1A2711F39B00046E92 /* Photo galery */,
 				838A1A17271070F200046E92 /* Post */,
 				83CE58C626EFFB7D00B419A3 /* Profile */,
-				835BB28C26E661FC00220593 /* SceneDelegate.swift */,
-				835BB28A26E661FC00220593 /* AppDelegate.swift */,
 				83CE58C426ED02E000B419A3 /* InfoViewController.swift */,
 				83CE58C026EBC08A00B419A3 /* PostViewController.swift */,
 				8301D0892799CF980008AF9B /* Feed */,
@@ -639,13 +648,16 @@
 				8301D09427A17B190008AF9B /* FeedFlowCoordinator.swift in Sources */,
 				83CE58C526ED02E000B419A3 /* InfoViewController.swift in Sources */,
 				835659FB27A75C9800053D7A /* BruteForce.swift in Sources */,
+				835D46FF27BD3CB0007688E4 /* CustomTimer.swift in Sources */,
 				8301D0882799CD010008AF9B /* CustomTextField.swift in Sources */,
 				8384AB792789F6300044592B /* FirstLoginFactory.swift in Sources */,
+				835D46FD27BC2365007688E4 /* BackgroundTimer.swift in Sources */,
 				8305BDA3276ABB2A00B3E960 /* User.swift in Sources */,
 				83CE58BD26EBBE6C00B419A3 /* FeedViewController.swift in Sources */,
 				8301D09E27A59BB70008AF9B /* MyTimer.swift in Sources */,
 				838A1A2227148BFC00046E92 /* PhotosViewController.swift in Sources */,
 				8305BDA5276ABC8C00B3E960 /* CurrentUserService.swift in Sources */,
+				835D46FB27BC0BD7007688E4 /* CustomAlert.swift in Sources */,
 				8305BDA72770C7AE00B3E960 /* TestUserService.swift in Sources */,
 				8384AB772789F5880044592B /* LoginFactory.swift in Sources */,
 				8301D09A27A18C7A0008AF9B /* ControllerFactory.swift in Sources */,

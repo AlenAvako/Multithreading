@@ -11,7 +11,7 @@ protocol LoginViewControllerDelegate: AnyObject {
     func checkLogin(name: String, password: String) -> Bool
 }
 
-class LoginViewController: UIViewController {
+final class LoginViewController: UIViewController {
     
     weak var delegate: LoginViewControllerDelegate?
     
@@ -200,7 +200,7 @@ class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: UITextFieldDelegate {
-    func setupViews() {
+    private func setupViews() {
         
         view.backgroundColor = .white
         
@@ -250,7 +250,7 @@ extension LoginViewController: UITextFieldDelegate {
         ])
     }
     
-    func setupStackView() {
+    private func setupStackView() {
         
         nameTextField.delegate = self
         nameTextField.tag = 0
