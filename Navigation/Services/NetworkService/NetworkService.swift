@@ -43,4 +43,36 @@ struct NetworkService {
         }
         dataTask.resume()
     }
+    
+    func testRequest(completion: @escaping (Data?, Error?) -> Void) {
+        guard let url = URL(string: "https://jsonplaceholder.typicode.com/todos/5") else { return }
+        let request = URLRequest(url: url)
+        
+        let task = createDataTask(from: request, completion: completion)
+        task.resume()
+    }
+    
+    func planetRequest(completion: @escaping (Data?, Error?) -> Void) {
+        guard let url = URL(string: "https://swapi.dev/api/planets/1") else { return }
+        let request = URLRequest(url: url)
+        
+        let task = createDataTask(from: request, completion: completion)
+        task.resume()
+    }
+    
+    func personRequest(person: String, completion: @escaping (Data?, Error?) -> Void) {
+        guard let url = URL(string: person) else { return }
+        let request = URLRequest(url: url)
+        
+        let task = createDataTask(from: request, completion: completion)
+        task.resume()
+    }
+    
+    private func createDataTask(from request: URLRequest, completion: @escaping (Data?, Error?) -> Void) -> URLSessionDataTask {
+        return URLSession.shared.dataTask(with: request) { data, response, error in
+            DispatchQueue.main.async {
+                completion(data, error)
+            }
+        }
+    }
 }
