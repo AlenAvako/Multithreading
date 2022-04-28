@@ -30,7 +30,10 @@
 		835D46FB27BC0BD7007688E4 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FA27BC0BD7007688E4 /* CustomAlert.swift */; };
 		835D46FD27BC2365007688E4 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FC27BC2365007688E4 /* BackgroundTimer.swift */; };
 		835D46FF27BD3CB0007688E4 /* CustomTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FE27BD3CB0007688E4 /* CustomTimer.swift */; };
+		8369367328182DA400D6666E /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369367228182DA400D6666E /* SignInView.swift */; };
+		83693675281856BB00D6666E /* SignInInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83693674281856BB00D6666E /* SignInInspector.swift */; };
 		8379F9B22816DD89005E4109 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8379F9B12816DD89005E4109 /* GoogleService-Info.plist */; };
+		8379F9B42816FC68005E4109 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8379F9B32816FC68005E4109 /* SignInViewController.swift */; };
 		8384AB512781F0250044592B /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB502781F0250044592B /* Checker.swift */; };
 		8384AB542781FCB70044592B /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB532781FCB70044592B /* LoginInspector.swift */; };
 		8384AB772789F5880044592B /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB762789F5880044592B /* LoginFactory.swift */; };
@@ -132,7 +135,10 @@
 		835D46FA27BC0BD7007688E4 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		835D46FC27BC2365007688E4 /* BackgroundTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
 		835D46FE27BD3CB0007688E4 /* CustomTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimer.swift; sourceTree = "<group>"; };
+		8369367228182DA400D6666E /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		83693674281856BB00D6666E /* SignInInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInspector.swift; sourceTree = "<group>"; };
 		8379F9B12816DD89005E4109 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8379F9B32816FC68005E4109 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		8384AB502781F0250044592B /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		8384AB532781FCB70044592B /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		8384AB762789F5880044592B /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
@@ -333,6 +339,7 @@
 			children = (
 				8384AB502781F0250044592B /* Checker.swift */,
 				8384AB532781FCB70044592B /* LoginInspector.swift */,
+				83693674281856BB00D6666E /* SignInInspector.swift */,
 			);
 			path = LoginChecker;
 			sourceTree = "<group>";
@@ -395,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				83C1F0F22810A9A900271AC3 /* CitizensTableView.swift */,
+				8369367228182DA400D6666E /* SignInView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,6 +413,7 @@
 				83CE58BE26EBBF3500B419A3 /* ProfileViewController.swift */,
 				83CE58C726EFFB9E00B419A3 /* ProfileHeaderView.swift */,
 				83F58FEF27039C67002BCC38 /* LoginViewController.swift */,
+				8379F9B32816FC68005E4109 /* SignInViewController.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -701,6 +710,7 @@
 				83C1F0F32810A9A900271AC3 /* CitizensTableView.swift in Sources */,
 				83CE58BF26EBBF3600B419A3 /* ProfileViewController.swift in Sources */,
 				83C1F0EE2810807B00271AC3 /* PlanetModel.swift in Sources */,
+				83693675281856BB00D6666E /* SignInInspector.swift in Sources */,
 				8301D09027A17A370008AF9B /* Coordinator.swift in Sources */,
 				8301D09427A17B190008AF9B /* FeedFlowCoordinator.swift in Sources */,
 				83CE58C526ED02E000B419A3 /* InfoViewController.swift in Sources */,
@@ -713,6 +723,7 @@
 				8305BDA3276ABB2A00B3E960 /* User.swift in Sources */,
 				83CE58BD26EBBE6C00B419A3 /* FeedViewController.swift in Sources */,
 				8301D09E27A59BB70008AF9B /* MyTimer.swift in Sources */,
+				8379F9B42816FC68005E4109 /* SignInViewController.swift in Sources */,
 				838A1A2227148BFC00046E92 /* PhotosViewController.swift in Sources */,
 				8305BDA5276ABC8C00B3E960 /* CurrentUserService.swift in Sources */,
 				835D46FB27BC0BD7007688E4 /* CustomAlert.swift in Sources */,
@@ -731,6 +742,7 @@
 				838A1A2427148CCF00046E92 /* PhotosCollectionViewCell.swift in Sources */,
 				83C1F0F02810A70900271AC3 /* PeopleModel.swift in Sources */,
 				83CE58C826EFFB9E00B419A3 /* ProfileHeaderView.swift in Sources */,
+				8369367328182DA400D6666E /* SignInView.swift in Sources */,
 				838A1A192710712D00046E92 /* PostTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

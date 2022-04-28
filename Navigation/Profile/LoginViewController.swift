@@ -8,7 +8,9 @@
 import UIKit
 
 protocol LoginViewControllerDelegate: AnyObject {
-    func checkLogin(name: String, password: String) -> Bool
+    func checkLogin(name: String, password: String, user: UserService, controller: UIViewController)
+    
+    func checkUserForLogIn(user: UserService, name: String, controller: UIViewController)
 }
 
 final class LoginViewController: UIViewController {
@@ -17,10 +19,6 @@ final class LoginViewController: UIViewController {
     
     var loginFactory: FirstLoginFactory?
     
-    var isAuthorized: Bool?
-    
-    var userName: String?
-    var userPassword: String?
     var userService: UserService = CurrentUserService()
     
     let loginInspector = LoginInspector()
@@ -64,7 +62,6 @@ final class LoginViewController: UIViewController {
     lazy var nameTextField: UITextField = {
         let nameTextField = UITextField()
         nameTextField.toAutoLayout()
-        nameTextField.addTarget(self, action: #selector(userLogin(_:)), for: .editingChanged)
         nameTextField.backgroundColor = .systemGray6
         nameTextField.textColor = UIColor.black
         nameTextField.autocapitalizationType = .none
@@ -80,7 +77,6 @@ final class LoginViewController: UIViewController {
     lazy var passwordTextField: UITextField = {
         let passwordTextField = UITextField()
         passwordTextField.toAutoLayout()
-        passwordTextField.addTarget(self, action: #selector(userPswrd(_:)), for: .editingChanged)
         passwordTextField.backgroundColor = .systemGray6
         passwordTextField.textColor = UIColor.black
         passwordTextField.autocapitalizationType = .none
@@ -96,11 +92,14 @@ final class LoginViewController: UIViewController {
         let button = CustomButton(color: "colorSuper", title: "Log In", titleColor: .white, cornerRadius: 10)
         button.toAutoLayout()
         button.tapButton = { [self] in
-            if delegate?.checkLogin(name: userName ?? "", password: userPassword ?? "") ?? false {
-                openProfileViewController(name: userName)
-            } else {
-                logInPasswordAlert()
+            guard let name = nameTextField.text, let password = passwordTextField.text, name != "", password != "" else {
+                logInPasswordAlert(title: "Внимание!", message: "Логин или пароль не заполнены, попробуйте снова или зарегестрируйтесь.")
+                return
             }
+            
+            delegate?.checkLogin(name: name, password: password, user: userService, controller: self)
+
+            print("user: \(name), password: \(password)")
         }
         button.clipsToBounds = true
         button.alpha = 1
@@ -124,7 +123,6 @@ final class LoginViewController: UIViewController {
                     self?.passwordTextField.text = self?.bruteForce.hackedPassword
                     self?.passwordTextField.indent(size: 15)
                     self?.passwordTextField.placeholder = "Password"
-                    self?.userPassword = self?.bruteForce.hackedPassword
                 }
             }
         }
@@ -167,6 +165,12 @@ final class LoginViewController: UIViewController {
                                                object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        checkUser()
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
@@ -175,31 +179,29 @@ final class LoginViewController: UIViewController {
     }
     
     private func openProfileViewController(name: String?) {
-        let profileVC = ProfileViewController(user: userService, name: name ?? "unknown")
-        navigationController?.pushViewController(profileVC, animated: true)
     }
     
-    private func logInPasswordAlert() {
-        let alert = UIAlertController(title: "Вход не выполнен", message: "Неверный Логин или Пароль!", preferredStyle: .alert)
-        let tryMore = UIAlertAction(title: "Попробовать еще", style: .default, handler: nil)
-        alert.addAction(tryMore)
+    private func logInPasswordAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alert.addAction(okButton)
+        
+        let signInButton = UIAlertAction(title: "Sign in", style: .default) { [weak self] action in
+            let singInVC = SignInViewController()
+            self?.navigationController?.pushViewController(singInVC, animated: true)
+        }
+        alert.addAction(signInButton)
+                                         
         self.present(alert, animated: true, completion: nil)
     }
     
-    //    MARK: objc func
-    
-    @objc private func userLogin(_ textField: UITextField) {
-        guard let name = textField.text else { return }
-        userName = name
-    }
-    
-    @objc private func userPswrd(_ textField: UITextField) {
-        guard let text = textField.text else { return }
-        userPassword = text
-    }
 }
 
 extension LoginViewController: UITextFieldDelegate {
+    private func checkUser() {
+        delegate?.checkUserForLogIn(user: userService, name: "", controller: self)
+    }
+    
     private func setupViews() {
         
         view.backgroundColor = .white
