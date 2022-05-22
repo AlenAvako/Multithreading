@@ -32,6 +32,7 @@
 		835D46FF27BD3CB0007688E4 /* CustomTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FE27BD3CB0007688E4 /* CustomTimer.swift */; };
 		8369367328182DA400D6666E /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8369367228182DA400D6666E /* SignInView.swift */; };
 		83693675281856BB00D6666E /* SignInInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83693674281856BB00D6666E /* SignInInspector.swift */; };
+		836E202F283A995700518C81 /* UserLogInResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 836E202E283A995700518C81 /* UserLogInResult.swift */; };
 		8379F9B22816DD89005E4109 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8379F9B12816DD89005E4109 /* GoogleService-Info.plist */; };
 		8379F9B42816FC68005E4109 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8379F9B32816FC68005E4109 /* SignInViewController.swift */; };
 		8384AB512781F0250044592B /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8384AB502781F0250044592B /* Checker.swift */; };
@@ -137,6 +138,7 @@
 		835D46FE27BD3CB0007688E4 /* CustomTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimer.swift; sourceTree = "<group>"; };
 		8369367228182DA400D6666E /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		83693674281856BB00D6666E /* SignInInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInInspector.swift; sourceTree = "<group>"; };
+		836E202E283A995700518C81 /* UserLogInResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLogInResult.swift; sourceTree = "<group>"; };
 		8379F9B12816DD89005E4109 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8379F9B32816FC68005E4109 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		8384AB502781F0250044592B /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
@@ -394,6 +396,7 @@
 				83C1F0E92810725200271AC3 /* TestInfoModel.swift */,
 				83C1F0ED2810807B00271AC3 /* PlanetModel.swift */,
 				83C1F0EF2810A70900271AC3 /* PeopleModel.swift */,
+				836E202E283A995700518C81 /* UserLogInResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -716,6 +719,7 @@
 				83CE58C526ED02E000B419A3 /* InfoViewController.swift in Sources */,
 				835659FB27A75C9800053D7A /* BruteForce.swift in Sources */,
 				835D46FF27BD3CB0007688E4 /* CustomTimer.swift in Sources */,
+				836E202F283A995700518C81 /* UserLogInResult.swift in Sources */,
 				83C1F0E7280F6A2600271AC3 /* NetworkService.swift in Sources */,
 				8301D0882799CD010008AF9B /* CustomTextField.swift in Sources */,
 				8384AB792789F6300044592B /* FirstLoginFactory.swift in Sources */,

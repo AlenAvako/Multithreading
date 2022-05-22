@@ -8,7 +8,7 @@
 import UIKit
 
 protocol LoginViewControllerDelegate: AnyObject {
-    func checkLogin(name: String, password: String, user: UserService, controller: UIViewController)
+    func checkLogin(name: String, password: String, completion: @escaping (Result<UserLogInResult, Error>) -> Void)
     
     func checkUserForLogIn(user: UserService, name: String, controller: UIViewController)
 }
@@ -97,7 +97,15 @@ final class LoginViewController: UIViewController {
                 return
             }
             
-            delegate?.checkLogin(name: name, password: password, user: userService, controller: self)
+            delegate?.checkLogin(name: name, password: password) { [weak self] result in
+                switch result {
+                case .success(let data):
+                    self?.openProfileVC(name: "")
+                case .failure(let error):
+                    let alert = CustomAlert.shared.createAlert(title: error.localizedDescription, message: "", style: .alert)
+                    self?.present(alert, animated: true)
+                }
+            }
 
             print("user: \(name), password: \(password)")
         }
@@ -178,9 +186,6 @@ final class LoginViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    private func openProfileViewController(name: String?) {
-    }
-    
     private func logInPasswordAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okButton = UIAlertAction(title: "Ok", style: .default, handler: nil)
@@ -195,6 +200,10 @@ final class LoginViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    private func openProfileVC(name: String) {
+        let profileVC = ProfileViewController(user: userService, name: name)
+        self.navigationController?.pushViewController(profileVC, animated: true)
+    }
 }
 
 extension LoginViewController: UITextFieldDelegate {

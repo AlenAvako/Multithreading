@@ -7,9 +7,18 @@
 
 import Foundation
 
+struct PlanetInfo: Decodable {
+    let message: String
+    let result: Properties
+}
+
+struct Properties: Decodable {
+    let properties: PlanetModel
+}
+
 struct PlanetModel: Decodable {
     let name: String
-    let rotation_period: String
-    let orbital_period: String
-    let residents: [String]
+    let rotationPeriod: String
+    let orbitalPeriod: String
+//    let residents: [String]
 }

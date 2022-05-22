@@ -34,23 +34,30 @@ class InfoViewController: UIViewController {
     }
     
     private func setLabelValue() {
-        dataFetcher.testInfoFetcher { infoModel in
-            guard let testModel = infoModel else { return }
-            self.testInfo = testModel
-            self.tableView.citizensTableView.reloadData()
+        dataFetcher.testInfoFetcher { [weak self] infoModel in
+            switch infoModel {
+            case .success(let data):
+                self?.testInfo = data
+                self?.tableView.citizensTableView.reloadData()
+            case .failure(let error):
+                let alert = CustomAlert.shared.createAlert(title: error.localizedDescription, message: "", style: .alert)
+                self?.present(alert, animated: true)
+            }
+            
         }
         
-        dataFetcher.planetInfoFetcher { planetModel in
-            self.planetInfo = planetModel
-            self.tableView.citizensTableView.reloadData()
-            guard let citizens = planetModel?.residents else { return }
-            for (index, value) in citizens.enumerated() {
-                self.dataFetcher.peopleDataFetcher(person: value) { peopleModel in
-                    guard let human = peopleModel else { return }
-                    self.store.append(human)
-                    self.tableView.citizensTableView.reloadData()
-                }
-            }
+        dataFetcher.planetInfoFetcher { [weak self] planetModel in
+            print(planetModel)
+//            self?.planetInfo = planetModel?.result
+//            self?.tableView.citizensTableView.reloadData()
+//            guard let citizens = planetModel?.result.residents else { return }
+//            for (index, value) in citizens.enumerated() {
+//                self?.dataFetcher.peopleDataFetcher(person: value) { peopleModel in
+//                    guard let human = peopleModel else { return }
+//                    self?.store.append(human)
+//                    self?.tableView.citizensTableView.reloadData()
+//                }
+//            }
         }
     }
 }
@@ -91,8 +98,8 @@ extension InfoViewController: UITableViewDataSource {
                             reuseIdentifier: String(describing: UITableViewCell.self))
             }
             
-            cell?.textLabel?.text = planetInfo?.name
-            cell?.detailTextLabel?.text = "Период обращения вокруг звезды: \(planetInfo?.orbital_period ?? "0") дня/дней"
+//            cell?.textLabel?.text = planetInfo?.name
+//            cell?.detailTextLabel?.text = "Период обращения вокруг звезды: \(planetInfo?.orbitalPeriod ?? "0") дня/дней"
             cell!.selectionStyle = .none
             return cell!
         }

@@ -7,30 +7,32 @@
 
 import Foundation
 
+enum NetworkErrors: Error {}
+
 class NetworkDataFetcher {
     
     private var networkService = NetworkService()
     
-    func testInfoFetcher(completion: @escaping (TestInfoModel?) -> ()) {
+    func testInfoFetcher(completion: @escaping (Swift.Result<TestInfoModel, NetworkErrors>) -> Void) {
         networkService.testRequest { data, error in
             if let error = error {
                 print("Error received request data: \(error.localizedDescription)")
-                completion(nil)
+                completion(.failure(error as! NetworkErrors))
             }
-            
-            let decode = self.decodeJSON(type: TestInfoModel.self, from: data)
-            completion(decode)
+
+            guard let decode = self.decodeJSON(type: TestInfoModel.self, from: data) else { return }
+            completion(.success(decode))
         }
     }
     
-    func planetInfoFetcher(completion: @escaping (PlanetModel?) -> ()) {
+    func planetInfoFetcher(completion: @escaping (PlanetInfo?) -> ()) {
         networkService.planetRequest { data, error in
             if let error = error {
                 print("Error received request data: \(error.localizedDescription)")
                 completion(nil)
             }
             
-            let decode = self.decodeJSON(type: PlanetModel.self, from: data)
+            let decode = self.decodeJSON(type: PlanetInfo.self, from: data)
             completion(decode)
         }
     }
@@ -49,6 +51,7 @@ class NetworkDataFetcher {
     
     private func decodeJSON<T: Decodable>(type: T.Type, from: Data?) -> T? {
         let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
         guard let data = from else { return nil }
         
         do {

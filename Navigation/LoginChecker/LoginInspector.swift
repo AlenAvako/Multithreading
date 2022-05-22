@@ -10,19 +10,20 @@ import FirebaseAuth
 
 class LoginInspector: LoginViewControllerDelegate {
     
-    func checkLogin(name: String, password: String, user: UserService, controller: UIViewController) {
-        
+    func checkLogin(name: String, password: String, completion: @escaping (Result<UserLogInResult, Error>) -> Void) {
         Auth.auth().signIn(withEmail: name, password: password) { [weak self] userData, error in
             if error != nil {
-                self?.logInPasswordAlert(title: "Внимание", message: String(describing: error!.localizedDescription), controller: controller)
+                guard let myError = error else { return }
+                completion(.failure(myError))
             }
             
             if userData != nil {
-                self?.openProfileVC(user: user, name: name, controller: controller)
+                let fetchedData = UserLogInResult(name: "")
+                completion(.success(fetchedData))
             }
-            
         }
     }
+    
     
     func checkUserForLogIn(user: UserService, name: String, controller: UIViewController) {
         
