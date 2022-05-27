@@ -10,10 +10,15 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
+    var appConfiguration: AppConfiguration?
+    let networkService = NetworkService()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        appConfiguration = AppConfiguration.allCases.randomElement()
+        guard let myConfiguration = appConfiguration else { return .random() }
+        networkService.urlSessionDataTask(caseURL: myConfiguration)
         return true
     }
 
