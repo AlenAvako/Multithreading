@@ -5,19 +5,22 @@
 //  Created by Ален Авако on 02.01.2022.
 //
 
-import UIKit
+import Foundation
 
 class Checker {
     
     static let shared = Checker()
     
-    var isAuthorized: Bool = false
+    private var password: String?
     
-    private let login = "Alen Avako"
-    private let pswrd = "12312"
+    var isCorrect: Bool = false
     
-    func checker(name: String, password: String) {
-        isAuthorized = pswrd == password && login == name
+    func getFirstPassword(firstPassword: String) {
+        self.password = firstPassword
+    }
+    
+    func checker(second: String) {
+        isCorrect = password == second
     }
     
     private init() {}

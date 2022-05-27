@@ -53,7 +53,7 @@ struct NetworkService {
     }
     
     func planetRequest(completion: @escaping (Data?, Error?) -> Void) {
-        guard let url = URL(string: "https://swapi.dev/api/planets/1") else { return }
+        guard let url = URL(string: "https://www.swapi.tech/api/planets/1") else { return }
         let request = URLRequest(url: url)
         
         let task = createDataTask(from: request, completion: completion)
