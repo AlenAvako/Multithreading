@@ -7,10 +7,12 @@
 
 import UIKit
 
+typealias Handler = (Result<String, Error>) -> Void
+
 protocol LoginViewControllerDelegate: AnyObject {
-    func checkLogin(name: String, password: String, completion: @escaping (Result<UserLogInResult, Error>) -> Void)
+    func login(inputLogin: String, inputPassword: String, completion: @escaping Handler)
     
-    func checkUserForLogIn(user: UserService, name: String, controller: UIViewController)
+    func signOut()
 }
 
 final class LoginViewController: UIViewController {
@@ -97,7 +99,7 @@ final class LoginViewController: UIViewController {
                 return
             }
             
-            delegate?.checkLogin(name: name, password: password) { [weak self] result in
+            delegate?.login(inputLogin: name, inputPassword: password) { [weak self] result in
                 switch result {
                 case .success(let data):
                     self?.openProfileVC(name: "")
@@ -174,7 +176,6 @@ final class LoginViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        checkUser()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -205,9 +206,9 @@ final class LoginViewController: UIViewController {
 }
 
 extension LoginViewController: UITextFieldDelegate {
-    private func checkUser() {
-        delegate?.checkUserForLogIn(user: userService, name: "", controller: self)
-    }
+//    private func checkUser() {
+//        delegate?.checkUserForLogIn(user: userService, name: "", controller: self)
+//    }
     
     private func setupViews() {
         

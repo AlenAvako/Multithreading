@@ -27,6 +27,11 @@
 		835BB28D26E661FC00220593 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835BB28C26E661FC00220593 /* SceneDelegate.swift */; };
 		835BB29426E661FF00220593 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 835BB29326E661FF00220593 /* Assets.xcassets */; };
 		835BB29726E661FF00220593 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 835BB29526E661FF00220593 /* LaunchScreen.storyboard */; };
+		835CE85C2840EF9700DDD805 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE85B2840EF9700DDD805 /* RealmService.swift */; };
+		835CE85E2840EFD200DDD805 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE85D2840EFD200DDD805 /* LoginService.swift */; };
+		835CE8602840F01A00DDD805 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE85F2840F01A00DDD805 /* FirebaseService.swift */; };
+		835CE8622840F04700DDD805 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE8612840F04700DDD805 /* AuthService.swift */; };
+		835CE8652840F14A00DDD805 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE8642840F14A00DDD805 /* Credentials.swift */; };
 		835D46FB27BC0BD7007688E4 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FA27BC0BD7007688E4 /* CustomAlert.swift */; };
 		835D46FD27BC2365007688E4 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FC27BC2365007688E4 /* BackgroundTimer.swift */; };
 		835D46FF27BD3CB0007688E4 /* CustomTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FE27BD3CB0007688E4 /* CustomTimer.swift */; };
@@ -133,6 +138,11 @@
 		835BB29326E661FF00220593 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		835BB29626E661FF00220593 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		835BB29826E661FF00220593 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		835CE85B2840EF9700DDD805 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		835CE85D2840EFD200DDD805 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		835CE85F2840F01A00DDD805 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		835CE8612840F04700DDD805 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		835CE8642840F14A00DDD805 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
 		835D46FA27BC0BD7007688E4 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		835D46FC27BC2365007688E4 /* BackgroundTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
 		835D46FE27BD3CB0007688E4 /* CustomTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimer.swift; sourceTree = "<group>"; };
@@ -313,6 +323,7 @@
 		835BB28926E661FC00220593 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				835CE8632840F12A00DDD805 /* Entities */,
 				83C1F0F12810A98700271AC3 /* Views */,
 				83C1F0E82810723D00271AC3 /* Models */,
 				835BB28C26E661FC00220593 /* SceneDelegate.swift */,
@@ -334,6 +345,14 @@
 				83F58FEE27039A5D002BCC38 /* Utilit */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		835CE8632840F12A00DDD805 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				835CE8642840F14A00DDD805 /* Credentials.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		8384AB522781FB970044592B /* LoginChecker */ = {
@@ -377,6 +396,10 @@
 			isa = PBXGroup;
 			children = (
 				83C1F0E5280F6A1500271AC3 /* NetworkService */,
+				835CE85B2840EF9700DDD805 /* RealmService.swift */,
+				835CE85D2840EFD200DDD805 /* LoginService.swift */,
+				835CE85F2840F01A00DDD805 /* FirebaseService.swift */,
+				835CE8612840F04700DDD805 /* AuthService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -709,6 +732,8 @@
 				83CE58C126EBC08A00B419A3 /* PostViewController.swift in Sources */,
 				835BB28B26E661FC00220593 /* AppDelegate.swift in Sources */,
 				838A1A2027147A0100046E92 /* ArrayOfPhotos.swift in Sources */,
+				835CE8622840F04700DDD805 /* AuthService.swift in Sources */,
+				835CE85E2840EFD200DDD805 /* LoginService.swift in Sources */,
 				835BB28D26E661FC00220593 /* SceneDelegate.swift in Sources */,
 				83C1F0F32810A9A900271AC3 /* CitizensTableView.swift in Sources */,
 				83CE58BF26EBBF3600B419A3 /* ProfileViewController.swift in Sources */,
@@ -719,6 +744,7 @@
 				83CE58C526ED02E000B419A3 /* InfoViewController.swift in Sources */,
 				835659FB27A75C9800053D7A /* BruteForce.swift in Sources */,
 				835D46FF27BD3CB0007688E4 /* CustomTimer.swift in Sources */,
+				835CE8602840F01A00DDD805 /* FirebaseService.swift in Sources */,
 				836E202F283A995700518C81 /* UserLogInResult.swift in Sources */,
 				83C1F0E7280F6A2600271AC3 /* NetworkService.swift in Sources */,
 				8301D0882799CD010008AF9B /* CustomTextField.swift in Sources */,
@@ -726,6 +752,7 @@
 				835D46FD27BC2365007688E4 /* BackgroundTimer.swift in Sources */,
 				8305BDA3276ABB2A00B3E960 /* User.swift in Sources */,
 				83CE58BD26EBBE6C00B419A3 /* FeedViewController.swift in Sources */,
+				835CE8652840F14A00DDD805 /* Credentials.swift in Sources */,
 				8301D09E27A59BB70008AF9B /* MyTimer.swift in Sources */,
 				8379F9B42816FC68005E4109 /* SignInViewController.swift in Sources */,
 				838A1A2227148BFC00046E92 /* PhotosViewController.swift in Sources */,
@@ -747,6 +774,7 @@
 				83C1F0F02810A70900271AC3 /* PeopleModel.swift in Sources */,
 				83CE58C826EFFB9E00B419A3 /* ProfileHeaderView.swift in Sources */,
 				8369367328182DA400D6666E /* SignInView.swift in Sources */,
+				835CE85C2840EF9700DDD805 /* RealmService.swift in Sources */,
 				838A1A192710712D00046E92 /* PostTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
