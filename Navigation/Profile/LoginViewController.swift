@@ -106,8 +106,6 @@ final class LoginViewController: UIViewController {
                     self?.present(alert, animated: true)
                 }
             }
-
-            print("user: \(name), password: \(password)")
         }
         button.clipsToBounds = true
         button.alpha = 1
