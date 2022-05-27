@@ -41,6 +41,11 @@
 		838A1A2227148BFC00046E92 /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A1A2127148BFC00046E92 /* PhotosViewController.swift */; };
 		838A1A2427148CCF00046E92 /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838A1A2327148CCF00046E92 /* PhotosCollectionViewCell.swift */; };
 		83C1F0E7280F6A2600271AC3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C1F0E6280F6A2600271AC3 /* NetworkService.swift */; };
+		83C1F0EA2810725200271AC3 /* TestInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C1F0E92810725200271AC3 /* TestInfoModel.swift */; };
+		83C1F0EC2810757C00271AC3 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C1F0EB2810757C00271AC3 /* NetworkDataFetcher.swift */; };
+		83C1F0EE2810807B00271AC3 /* PlanetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C1F0ED2810807B00271AC3 /* PlanetModel.swift */; };
+		83C1F0F02810A70900271AC3 /* PeopleModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C1F0EF2810A70900271AC3 /* PeopleModel.swift */; };
+		83C1F0F32810A9A900271AC3 /* CitizensTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C1F0F22810A9A900271AC3 /* CitizensTableView.swift */; };
 		83CE58BD26EBBE6C00B419A3 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE58BC26EBBE6C00B419A3 /* FeedViewController.swift */; };
 		83CE58BF26EBBF3600B419A3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE58BE26EBBF3500B419A3 /* ProfileViewController.swift */; };
 		83CE58C126EBC08A00B419A3 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CE58C026EBC08A00B419A3 /* PostViewController.swift */; };
@@ -136,6 +141,11 @@
 		838A1A2127148BFC00046E92 /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		838A1A2327148CCF00046E92 /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		83C1F0E6280F6A2600271AC3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		83C1F0E92810725200271AC3 /* TestInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestInfoModel.swift; sourceTree = "<group>"; };
+		83C1F0EB2810757C00271AC3 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
+		83C1F0ED2810807B00271AC3 /* PlanetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetModel.swift; sourceTree = "<group>"; };
+		83C1F0EF2810A70900271AC3 /* PeopleModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleModel.swift; sourceTree = "<group>"; };
+		83C1F0F22810A9A900271AC3 /* CitizensTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitizensTableView.swift; sourceTree = "<group>"; };
 		83CE58BC26EBBE6C00B419A3 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		83CE58BE26EBBF3500B419A3 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		83CE58C026EBC08A00B419A3 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
@@ -293,6 +303,8 @@
 		835BB28926E661FC00220593 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				83C1F0F12810A98700271AC3 /* Views */,
+				83C1F0E82810723D00271AC3 /* Models */,
 				835BB28C26E661FC00220593 /* SceneDelegate.swift */,
 				835BB28A26E661FC00220593 /* AppDelegate.swift */,
 				83C1F0E4280F6A0200271AC3 /* Services */,
@@ -361,8 +373,27 @@
 			isa = PBXGroup;
 			children = (
 				83C1F0E6280F6A2600271AC3 /* NetworkService.swift */,
+				83C1F0EB2810757C00271AC3 /* NetworkDataFetcher.swift */,
 			);
 			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		83C1F0E82810723D00271AC3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				83C1F0E92810725200271AC3 /* TestInfoModel.swift */,
+				83C1F0ED2810807B00271AC3 /* PlanetModel.swift */,
+				83C1F0EF2810A70900271AC3 /* PeopleModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		83C1F0F12810A98700271AC3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				83C1F0F22810A9A900271AC3 /* CitizensTableView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		83CE58C626EFFB7D00B419A3 /* Profile */ = {
@@ -658,11 +689,14 @@
 				8384AB542781FCB70044592B /* LoginInspector.swift in Sources */,
 				83F58FF027039C67002BCC38 /* LoginViewController.swift in Sources */,
 				8384AB512781F0250044592B /* Checker.swift in Sources */,
+				83C1F0EA2810725200271AC3 /* TestInfoModel.swift in Sources */,
 				83CE58C126EBC08A00B419A3 /* PostViewController.swift in Sources */,
 				835BB28B26E661FC00220593 /* AppDelegate.swift in Sources */,
 				838A1A2027147A0100046E92 /* ArrayOfPhotos.swift in Sources */,
 				835BB28D26E661FC00220593 /* SceneDelegate.swift in Sources */,
+				83C1F0F32810A9A900271AC3 /* CitizensTableView.swift in Sources */,
 				83CE58BF26EBBF3600B419A3 /* ProfileViewController.swift in Sources */,
+				83C1F0EE2810807B00271AC3 /* PlanetModel.swift in Sources */,
 				8301D09027A17A370008AF9B /* Coordinator.swift in Sources */,
 				8301D09427A17B190008AF9B /* FeedFlowCoordinator.swift in Sources */,
 				83CE58C526ED02E000B419A3 /* InfoViewController.swift in Sources */,
@@ -684,12 +718,14 @@
 				83F58FF42704B191002BCC38 /* publicExtansions.swift in Sources */,
 				8301D09627A17C770008AF9B /* FeedViewModel.swift in Sources */,
 				838A1A1C2711F5DC00046E92 /* PhotosTableViewCell.swift in Sources */,
+				83C1F0EC2810757C00271AC3 /* NetworkDataFetcher.swift in Sources */,
 				8301D09227A17AFD0008AF9B /* AppCoordinator.swift in Sources */,
 				83F58FF62704C0B1002BCC38 /* CGFloatConstants.swift in Sources */,
 				8301D08C2799F78F0008AF9B /* RandomWord.swift in Sources */,
 				8305BDA1276ABAF300B3E960 /* UserService.swift in Sources */,
 				83349A142796072900CAB9A0 /* CustomButton.swift in Sources */,
 				838A1A2427148CCF00046E92 /* PhotosCollectionViewCell.swift in Sources */,
+				83C1F0F02810A70900271AC3 /* PeopleModel.swift in Sources */,
 				83CE58C826EFFB9E00B419A3 /* ProfileHeaderView.swift in Sources */,
 				838A1A192710712D00046E92 /* PostTableViewCell.swift in Sources */,
 			);
