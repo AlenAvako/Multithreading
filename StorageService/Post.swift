@@ -13,6 +13,14 @@ public struct NewPost {
     public var image: String
     public var likes: Int
     public var views: Int
+    
+    public init(author: String, description: String, image: String, likes: Int, views: Int) {
+        self.author = author
+        self.description = description
+        self.image = image
+        self.likes = likes
+        self.views = views
+    }
 }
 
 public let post1 = NewPost(author: "Natasha Romanoff", description: "with friends", image: "post1", likes: 333, views: 333)

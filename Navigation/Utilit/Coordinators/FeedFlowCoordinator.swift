@@ -8,17 +8,18 @@
 import UIKit
 
 class FeedFlowCoordinator: Coordinator {
-    var coordinators: [Coordinator] = []
     let navigationController: UINavigationController
-    private let factory: ControllerFactory
+    private let factory: ControllerFactoryProtocol
     
-    init(navigationController: UINavigationController, factory: ControllerFactory) {
+    init(navigationController: UINavigationController, factory: ControllerFactoryProtocol) {
         self.navigationController = navigationController
         self.factory = factory
     }
     
     func start() {
-        let feedController = factory.makeFeed()
+        let checker = RandomWord()
+        let viewModel = FeedViewModel(checker: checker)
+        let feedController = factory.viewController(for: .feed(viewModel: viewModel)) as! FeedViewController
         navigationController.pushViewController(feedController, animated: true)
     }
 }

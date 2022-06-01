@@ -15,6 +15,8 @@ class ProfileViewController: UIViewController {
     let user: UserService
     var myUser: User?
     
+    private let coreDataService = CoreDataService()
+    
     init(user: UserService, name: String) {
         self.user = user
         self.myUser = user.checkUser(name)
@@ -36,6 +38,9 @@ class ProfileViewController: UIViewController {
         #if DEBUG
         view.backgroundColor = .yellow
         #endif
+        
+        navigationItem.hidesBackButton = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Sign Out", style: .plain, target: self, action: #selector(signOutTapped))
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -68,6 +73,10 @@ class ProfileViewController: UIViewController {
             postTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             postTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+    }
+    
+    @objc func signOutTapped() {
+
     }
 }
 
@@ -144,11 +153,29 @@ extension ProfileViewController: UITableViewDelegate {
             return 0
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 {
+            let doubleTap = UITapGestureRecognizer(target: self, action: #selector(savePostCoreData(_:)))
+            doubleTap.numberOfTapsRequired = 2
+            postTableView.addGestureRecognizer(doubleTap)
+        }
+    }
 }
 
 extension ProfileViewController: PhotosTableViewCellDelegate {
     func didSelectButton() {
         let photoVC = PhotosViewController()
         navigationController?.pushViewController(photoVC, animated: true)
+    }
+    
+    @objc func savePostCoreData(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            let touchLocation: CGPoint = sender.location(in: sender.view)
+            guard let indexPath: IndexPath = postTableView.indexPathForRow(at: touchLocation) else { return }
+            let post = arrayOfPosts[indexPath.row]
+            coreDataService.addFavoritePost(post: post)
+            print(post)
+        }
     }
 }

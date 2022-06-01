@@ -201,6 +201,7 @@ final class LoginViewController: UIViewController {
     
     private func openProfileVC(name: String) {
         let profileVC = ProfileViewController(user: userService, name: name)
+        let profileNC = UINavigationController(rootViewController: profileVC)
         self.navigationController?.pushViewController(profileVC, animated: true)
     }
 }

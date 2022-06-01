@@ -15,7 +15,7 @@
 		8301D09227A17AFD0008AF9B /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8301D09127A17AFD0008AF9B /* AppCoordinator.swift */; };
 		8301D09427A17B190008AF9B /* FeedFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8301D09327A17B190008AF9B /* FeedFlowCoordinator.swift */; };
 		8301D09627A17C770008AF9B /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8301D09527A17C770008AF9B /* FeedViewModel.swift */; };
-		8301D09A27A18C7A0008AF9B /* ControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8301D09927A18C7A0008AF9B /* ControllerFactory.swift */; };
+		8301D09A27A18C7A0008AF9B /* ControllerFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8301D09927A18C7A0008AF9B /* ControllerFactoryProtocol.swift */; };
 		8301D09E27A59BB70008AF9B /* MyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8301D09D27A59BB70008AF9B /* MyTimer.swift */; };
 		8305BDA1276ABAF300B3E960 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BDA0276ABAF300B3E960 /* UserService.swift */; };
 		8305BDA3276ABB2A00B3E960 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8305BDA2276ABB2A00B3E960 /* User.swift */; };
@@ -32,6 +32,11 @@
 		835CE8602840F01A00DDD805 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE85F2840F01A00DDD805 /* FirebaseService.swift */; };
 		835CE8622840F04700DDD805 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE8612840F04700DDD805 /* AuthService.swift */; };
 		835CE8652840F14A00DDD805 /* Credentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE8642840F14A00DDD805 /* Credentials.swift */; };
+		835CE8682846661300DDD805 /* FavoritePostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE8672846661300DDD805 /* FavoritePostsViewController.swift */; };
+		835CE86B2846666C00DDD805 /* FavoritePostsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE86A2846666C00DDD805 /* FavoritePostsViewModel.swift */; };
+		835CE86D2846674000DDD805 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE86C2846674000DDD805 /* CoreDataService.swift */; };
+		835CE870284667A600DDD805 /* FavoritePosts.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 835CE86E284667A600DDD805 /* FavoritePosts.xcdatamodeld */; };
+		835CE87228466EA100DDD805 /* FavoritePostsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835CE87128466EA100DDD805 /* FavoritePostsCoordinator.swift */; };
 		835D46FB27BC0BD7007688E4 /* CustomAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FA27BC0BD7007688E4 /* CustomAlert.swift */; };
 		835D46FD27BC2365007688E4 /* BackgroundTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FC27BC2365007688E4 /* BackgroundTimer.swift */; };
 		835D46FF27BD3CB0007688E4 /* CustomTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835D46FE27BD3CB0007688E4 /* CustomTimer.swift */; };
@@ -124,7 +129,7 @@
 		8301D09127A17AFD0008AF9B /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		8301D09327A17B190008AF9B /* FeedFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedFlowCoordinator.swift; sourceTree = "<group>"; };
 		8301D09527A17C770008AF9B /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
-		8301D09927A18C7A0008AF9B /* ControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerFactory.swift; sourceTree = "<group>"; };
+		8301D09927A18C7A0008AF9B /* ControllerFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerFactoryProtocol.swift; sourceTree = "<group>"; };
 		8301D09D27A59BB70008AF9B /* MyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyTimer.swift; sourceTree = "<group>"; };
 		8305BDA0276ABAF300B3E960 /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		8305BDA2276ABB2A00B3E960 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -143,6 +148,11 @@
 		835CE85F2840F01A00DDD805 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		835CE8612840F04700DDD805 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		835CE8642840F14A00DDD805 /* Credentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credentials.swift; sourceTree = "<group>"; };
+		835CE8672846661300DDD805 /* FavoritePostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsViewController.swift; sourceTree = "<group>"; };
+		835CE86A2846666C00DDD805 /* FavoritePostsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsViewModel.swift; sourceTree = "<group>"; };
+		835CE86C2846674000DDD805 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		835CE86F284667A600DDD805 /* FavoritePosts.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoritePosts.xcdatamodel; sourceTree = "<group>"; };
+		835CE87128466EA100DDD805 /* FavoritePostsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsCoordinator.swift; sourceTree = "<group>"; };
 		835D46FA27BC0BD7007688E4 /* CustomAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlert.swift; sourceTree = "<group>"; };
 		835D46FC27BC2365007688E4 /* BackgroundTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundTimer.swift; sourceTree = "<group>"; };
 		835D46FE27BD3CB0007688E4 /* CustomTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTimer.swift; sourceTree = "<group>"; };
@@ -266,6 +276,7 @@
 				8301D08F27A17A370008AF9B /* Coordinator.swift */,
 				8301D09127A17AFD0008AF9B /* AppCoordinator.swift */,
 				8301D09327A17B190008AF9B /* FeedFlowCoordinator.swift */,
+				835CE87128466EA100DDD805 /* FavoritePostsCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -273,7 +284,7 @@
 		8301D09727A18C450008AF9B /* FeedFactory */ = {
 			isa = PBXGroup;
 			children = (
-				8301D09927A18C7A0008AF9B /* ControllerFactory.swift */,
+				8301D09927A18C7A0008AF9B /* ControllerFactoryProtocol.swift */,
 			);
 			path = FeedFactory;
 			sourceTree = "<group>";
@@ -323,6 +334,8 @@
 		835BB28926E661FC00220593 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				835CE8692846665600DDD805 /* ViewModel */,
+				835CE866284665F800DDD805 /* Controllers */,
 				835CE8632840F12A00DDD805 /* Entities */,
 				83C1F0F12810A98700271AC3 /* Views */,
 				83C1F0E82810723D00271AC3 /* Models */,
@@ -334,8 +347,6 @@
 				838A1A1A2711F39B00046E92 /* Photo galery */,
 				838A1A17271070F200046E92 /* Post */,
 				83CE58C626EFFB7D00B419A3 /* Profile */,
-				83CE58C426ED02E000B419A3 /* InfoViewController.swift */,
-				83CE58C026EBC08A00B419A3 /* PostViewController.swift */,
 				8301D0892799CF980008AF9B /* Feed */,
 				835BB29326E661FF00220593 /* Assets.xcassets */,
 				835BB29526E661FF00220593 /* LaunchScreen.storyboard */,
@@ -343,6 +354,7 @@
 				8379F9B12816DD89005E4109 /* GoogleService-Info.plist */,
 				8301D09827A18C580008AF9B /* Factorys */,
 				83F58FEE27039A5D002BCC38 /* Utilit */,
+				835CE86E284667A600DDD805 /* FavoritePosts.xcdatamodeld */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -353,6 +365,24 @@
 				835CE8642840F14A00DDD805 /* Credentials.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		835CE866284665F800DDD805 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				83CE58C426ED02E000B419A3 /* InfoViewController.swift */,
+				83CE58C026EBC08A00B419A3 /* PostViewController.swift */,
+				835CE8672846661300DDD805 /* FavoritePostsViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		835CE8692846665600DDD805 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				835CE86A2846666C00DDD805 /* FavoritePostsViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		8384AB522781FB970044592B /* LoginChecker */ = {
@@ -400,6 +430,7 @@
 				835CE85D2840EFD200DDD805 /* LoginService.swift */,
 				835CE85F2840F01A00DDD805 /* FirebaseService.swift */,
 				835CE8612840F04700DDD805 /* AuthService.swift */,
+				835CE86C2846674000DDD805 /* CoreDataService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -731,20 +762,24 @@
 				83C1F0EA2810725200271AC3 /* TestInfoModel.swift in Sources */,
 				83CE58C126EBC08A00B419A3 /* PostViewController.swift in Sources */,
 				835BB28B26E661FC00220593 /* AppDelegate.swift in Sources */,
+				835CE87228466EA100DDD805 /* FavoritePostsCoordinator.swift in Sources */,
 				838A1A2027147A0100046E92 /* ArrayOfPhotos.swift in Sources */,
 				835CE8622840F04700DDD805 /* AuthService.swift in Sources */,
 				835CE85E2840EFD200DDD805 /* LoginService.swift in Sources */,
 				835BB28D26E661FC00220593 /* SceneDelegate.swift in Sources */,
 				83C1F0F32810A9A900271AC3 /* CitizensTableView.swift in Sources */,
 				83CE58BF26EBBF3600B419A3 /* ProfileViewController.swift in Sources */,
+				835CE86B2846666C00DDD805 /* FavoritePostsViewModel.swift in Sources */,
 				83C1F0EE2810807B00271AC3 /* PlanetModel.swift in Sources */,
 				83693675281856BB00D6666E /* SignInInspector.swift in Sources */,
 				8301D09027A17A370008AF9B /* Coordinator.swift in Sources */,
+				835CE86D2846674000DDD805 /* CoreDataService.swift in Sources */,
 				8301D09427A17B190008AF9B /* FeedFlowCoordinator.swift in Sources */,
 				83CE58C526ED02E000B419A3 /* InfoViewController.swift in Sources */,
 				835659FB27A75C9800053D7A /* BruteForce.swift in Sources */,
 				835D46FF27BD3CB0007688E4 /* CustomTimer.swift in Sources */,
 				835CE8602840F01A00DDD805 /* FirebaseService.swift in Sources */,
+				835CE8682846661300DDD805 /* FavoritePostsViewController.swift in Sources */,
 				836E202F283A995700518C81 /* UserLogInResult.swift in Sources */,
 				83C1F0E7280F6A2600271AC3 /* NetworkService.swift in Sources */,
 				8301D0882799CD010008AF9B /* CustomTextField.swift in Sources */,
@@ -760,7 +795,7 @@
 				835D46FB27BC0BD7007688E4 /* CustomAlert.swift in Sources */,
 				8305BDA72770C7AE00B3E960 /* TestUserService.swift in Sources */,
 				8384AB772789F5880044592B /* LoginFactory.swift in Sources */,
-				8301D09A27A18C7A0008AF9B /* ControllerFactory.swift in Sources */,
+				8301D09A27A18C7A0008AF9B /* ControllerFactoryProtocol.swift in Sources */,
 				83F58FF42704B191002BCC38 /* publicExtansions.swift in Sources */,
 				8301D09627A17C770008AF9B /* FeedViewModel.swift in Sources */,
 				838A1A1C2711F5DC00046E92 /* PhotosTableViewCell.swift in Sources */,
@@ -770,6 +805,7 @@
 				8301D08C2799F78F0008AF9B /* RandomWord.swift in Sources */,
 				8305BDA1276ABAF300B3E960 /* UserService.swift in Sources */,
 				83349A142796072900CAB9A0 /* CustomButton.swift in Sources */,
+				835CE870284667A600DDD805 /* FavoritePosts.xcdatamodeld in Sources */,
 				838A1A2427148CCF00046E92 /* PhotosCollectionViewCell.swift in Sources */,
 				83C1F0F02810A70900271AC3 /* PeopleModel.swift in Sources */,
 				83CE58C826EFFB9E00B419A3 /* ProfileHeaderView.swift in Sources */,
@@ -1163,6 +1199,19 @@
 			productName = iOSIntPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		835CE86E284667A600DDD805 /* FavoritePosts.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				835CE86F284667A600DDD805 /* FavoritePosts.xcdatamodel */,
+			);
+			currentVersion = 835CE86F284667A600DDD805 /* FavoritePosts.xcdatamodel */;
+			path = FavoritePosts.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 835BB27F26E661FC00220593 /* Project object */;
 }
